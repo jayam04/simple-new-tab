@@ -23,8 +23,8 @@ body {
 
 hr {
   color: #333;
+  border: .5px solid;
   width: 92%;
-  stroke: #333;
 }
 
 .main-heading {
@@ -32,9 +32,12 @@ hr {
 }
 
 .clock {
+  width: fit-content;
   font-size: large;
   font-family: 'Arial', sans-serif;
   color: #333;
+  padding: 10%;
+  border: .2px solid #333;
 }
 
 #options-container {

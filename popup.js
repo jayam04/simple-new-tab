@@ -1,43 +1,58 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Load stored preferences on popup open
-  chrome.storage.sync.get(["showMilliseconds", "use12HourFormat", "googleFont"], function (result) {
-    document.getElementById("showMilliseconds").checked = result.showMilliseconds || false;
-    document.getElementById("use12HourFormat").checked = result.use12HourFormat || false;
-    document.getElementById("googleFontInput").value = result.googleFont || "Roboto";
-  });
+    // Load stored preferences on popup open
+    chrome.storage.sync.get(
+        ["showMilliseconds", "use12HourFormat", "googleFont"],
+        function (result) {
+            document.getElementById("showMilliseconds").checked =
+                result.showMilliseconds || false;
+            document.getElementById("use12HourFormat").checked =
+                result.use12HourFormat || false;
+            document.getElementById("googleFontInput").value =
+                result.googleFont || "Roboto";
+        }
+    );
 
-  // Event listener for "Apply Font" button
-  document.getElementById("applyGoogleFont").addEventListener("click", function () {
-    const googleFontValue = document.getElementById("googleFontInput").value;
-    applyGoogleFont(googleFontValue);
-  });
+    // Event listener for "Apply Font" button
+    document
+        .getElementById("applyGoogleFont")
+        .addEventListener("click", function () {
+            const googleFontValue =
+                document.getElementById("googleFontInput").value;
+            applyGoogleFont(googleFontValue);
+        });
 
-  // Event listener for "Show Milliseconds" checkbox
-  document.getElementById("showMilliseconds").addEventListener("change", function () {
-    const showMilliseconds = this.checked;
-    savePreference("showMilliseconds", showMilliseconds);
-  });
+    // Event listener for "Show Milliseconds" checkbox
+    document
+        .getElementById("showMilliseconds")
+        .addEventListener("change", function () {
+            const showMilliseconds = this.checked;
+            savePreference("showMilliseconds", showMilliseconds);
+        });
 
-  // Event listener for "Use 12-Hour Clock" checkbox
-  document.getElementById("use12HourFormat").addEventListener("change", function () {
-    const use12HourFormat = this.checked;
-    savePreference("use12HourFormat", use12HourFormat);
-  });
+    // Event listener for "Use 12-Hour Clock" checkbox
+    document
+        .getElementById("use12HourFormat")
+        .addEventListener("change", function () {
+            const use12HourFormat = this.checked;
+            savePreference("use12HourFormat", use12HourFormat);
+        });
 });
 
 // Function to apply Google Font and save it to storage
 function applyGoogleFont(fontFamily) {
-  document.getElementById("googleFontStyle").innerText = `body { font-family: '${fontFamily}', sans-serif; }`;
-  savePreference("googleFont", fontFamily);
+    document.getElementById(
+        "googleFontStyle"
+    ).innerText = `body { font-family: '${fontFamily}', sans-serif; }`;
+    savePreference("googleFont", fontFamily);
 }
 
 // Function to save a preference to Chrome storage
 function savePreference(key, value) {
-  const data = {};
-  data[key] = value;
-  chrome.storage.sync.set(data, function () {
-    console.log(`${key} preference saved: ${value}`);
-  });
+    const data = {};
+    data[key] = value;
+    chrome.storage.sync.set(data, function () {
+        console.log(`${key} preference saved: ${value}`);
+    });
 }
 
 function updateClock() {
@@ -49,7 +64,7 @@ function updateClock() {
 
     const digitalClockElement = document.getElementById("digitalClock");
     digitalClockElement.innerText = timeString;
-    digitalClockElement.setAttribute("font-family", "Long Cang")
+    digitalClockElement.setAttribute("font-family", "Long Cang");
 }
 
 document.addEventListener("DOMContentLoaded", function () {
