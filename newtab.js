@@ -1,16 +1,26 @@
+import { getTimeToDisplay } from "./helper.js";
+import { applyGoogleFont } from "./popup.js"
 function updateClockNewTab() {
-  const now = new Date();
-  const hours = now.getHours().toString().padStart(2, '0');
-  const minutes = now.getMinutes().toString().padStart(2, '0');
-  const seconds = now.getSeconds().toString().padStart(2, '0');
-  const timeString = `${hours}:${minutes}:${seconds}`;
+    let showSeconds = true;
+    let use12HourFormat = true;
 
-  document.getElementById('digitalClockNewTab').innerText = timeString;
+    chrome.storage.sync.get(
+        ["showMilliseconds", "use12HourFormat", "googleFont"],
+        function (result) {
+            showSeconds = result.showMilliseconds;
+            use12HourFormat = result.use12HourFormat;
+            const timeString = getTimeToDisplay(use12HourFormat, showSeconds);
+
+            document.getElementById("digitalClockNewTab").innerText =
+                timeString;
+            document.getElementById("digitalClockNewTab").style.fontFamily = `'${result.googleFont}', 'Roboto'`;
+            applyGoogleFont(result.googleFont, "digitalClockNewTab");
+        }
+    );
 }
 
 // Update the clock every second
-setInterval(updateClockNewTab, 1000);
+setInterval(updateClockNewTab, 10);
 
 // Initial update
 updateClockNewTab();
-

@@ -1,21 +1,31 @@
 {
   "manifest_version": 2,
-  "name": "Digital Clock New Tab",
+  "name": "Simple New Tab",
   "version": "1.0",
-  "description": "Displays a digital clock on the new tab page.",
+  "description": "Simple Tab with Digital Clock",
   "permissions": ["storage", "activeTab"],
   "browser_action": {
     "default_icon": {
-      "16": "icons/icon16.jpg"
+      "16": "icons/icon16.jpg",
+      "32": "icons/icon32.jpg",
+      "48": "icons/icon48.jpg",
+      "64": "icons/icon64.jpg",
+      "128": "icons/icon128.jpg",
+      "256": "icons/icon256.jpg"
     },
-    "default_title": "Digital Clock New Tab",
+    "default_title": "Simple New Tab",
     "default_popup": "popup.html"
   },
   "chrome_url_overrides": {
     "newtab": "newtab.html"
   },
   "icons": {
-    "16": "icons/icon16.jpg"
+    "16": "icons/icon16.jpg",
+    "32": "icons/icon32.jpg",
+    "48": "icons/icon48.jpg",
+    "64": "icons/icon64.jpg",
+    "128": "icons/icon128.jpg",
+    "256": "icons/icon256.jpg"
   }
 }
 
