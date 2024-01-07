@@ -1,3 +1,5 @@
+import { getGoogleFontUrl } from "./helper.js";
+
 document.addEventListener("DOMContentLoaded", function () {
     // Load stored preferences on popup open
     chrome.storage.sync.get(
@@ -40,9 +42,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Function to apply Google Font and save it to storage
 function applyGoogleFont(fontFamily) {
-    document.getElementById(
-        "googleFontStyle"
-    ).innerText = `body { font-family: '${fontFamily}', sans-serif; }`;
+    // document.getElementById(
+    //     "googleFontStyle"
+    // ).innerText = `body { font-family: '${fontFamily}', sans-serif; }`;
+    // document.getElementById("font-import").innerText(getGoogleFontUrl(fontFamily));
+    // document.getElementById("digitalClock").setAttribute("font-family", `${fontFamily}, 'Roboto'`);
+    const fontStylesheet = document.createElement("link");
+    fontStylesheet.href = `https://fonts.googleapis.com/css2?family=${fontFamily.replace(
+        / /g,
+        "+"
+    )}`;
+    fontStylesheet.rel = "stylesheet";
+    document.head.appendChild(fontStylesheet);
+
+    // Apply the font to the clock element
+    const digitalClockElement = document.getElementById("digitalClock");
+    digitalClockElement.style.fontFamily = `'${fontFamily}', sans-serif`;
+
     savePreference("googleFont", fontFamily);
 }
 
