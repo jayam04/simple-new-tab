@@ -1,13 +1,11 @@
 import { getTimeToDisplay } from "./helper.js";
-
+import { applyGoogleFont } from "./popup.js"
 function updateClockNewTab() {
-    const now = new Date();
-
     let showSeconds = true;
     let use12HourFormat = true;
 
     chrome.storage.sync.get(
-        ["showMilliseconds", "use12HourFormat"],
+        ["showMilliseconds", "use12HourFormat", "googleFont"],
         function (result) {
             showSeconds = result.showMilliseconds;
             use12HourFormat = result.use12HourFormat;
@@ -15,6 +13,8 @@ function updateClockNewTab() {
 
             document.getElementById("digitalClockNewTab").innerText =
                 timeString;
+            document.getElementById("digitalClockNewTab").style.fontFamily = `'${result.googleFont}', 'Roboto'`;
+            applyGoogleFont(result.googleFont, "digitalClockNewTab");
         }
     );
 }

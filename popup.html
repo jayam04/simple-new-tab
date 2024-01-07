@@ -5,40 +5,43 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="popup.css" />
         <script src="popup.js" type="module"></script>
+        <script src="clock.js" type="module"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Roboto&display=swap"
             rel="stylesheet"
         />
-        <style id="font-import"></style>
     </head>
     <body>
         <h1 class="main-heading">Simple New Tab</h1>
         <hr />
         <div id="options-container">
             <label>
-                <input type="checkbox" id="showMilliseconds" /> Show
-                Milliseconds
+                <input type="checkbox" id="showMilliseconds" /> Show Seconds
             </label>
             <label>
                 <input type="checkbox" id="use12HourFormat" /> Use 12-Hour Clock
             </label>
-            <label> Select Font: #TODO </label>
+            <label>
+                Font Size
+                <input type="number" , id="fontSize" />
+            </label>
             <label id="font-selection">
-                Add Google Font:
+                Font (exact name as in Google Fonts, case-sensitive):
                 <input
                     type="text"
                     id="googleFontInput"
                     placeholder="Enter Google Font Family"
                 />
-                <button id="applyGoogleFont">Add Font</button>
+                <button id="applyGoogleFont">Use Font</button>
             </label>
         </div>
         <p class="sync-notice"></p>
         <div>
             Preview:
             <div class="clock" id="digitalClock"></div>
+            <div id="some"></div>
         </div>
     </body>
 </html>

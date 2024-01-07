@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .addEventListener("click", function () {
             const googleFontValue =
                 document.getElementById("googleFontInput").value;
-            applyGoogleFont(googleFontValue);
+            applyGoogleFont(googleFontValue, "digitalClock");
         });
 
     // Event listener for "Show Milliseconds" checkbox
@@ -41,22 +41,21 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Function to apply Google Font and save it to storage
-function applyGoogleFont(fontFamily) {
-    // document.getElementById(
-    //     "googleFontStyle"
-    // ).innerText = `body { font-family: '${fontFamily}', sans-serif; }`;
-    // document.getElementById("font-import").innerText(getGoogleFontUrl(fontFamily));
-    // document.getElementById("digitalClock").setAttribute("font-family", `${fontFamily}, 'Roboto'`);
+function applyGoogleFont(fontFamily, elementId) {
     const fontStylesheet = document.createElement("link");
     fontStylesheet.href = `https://fonts.googleapis.com/css2?family=${fontFamily.replace(
-        / /g,
+        " ",
         "+"
     )}`;
     fontStylesheet.rel = "stylesheet";
     document.head.appendChild(fontStylesheet);
 
+    if (!elementId) {
+        elementId = "digitalClock";
+    }
+
     // Apply the font to the clock element
-    const digitalClockElement = document.getElementById("digitalClock");
+    const digitalClockElement = document.getElementById(elementId);
     digitalClockElement.style.fontFamily = `'${fontFamily}', sans-serif`;
 
     savePreference("googleFont", fontFamily);
@@ -70,23 +69,3 @@ function savePreference(key, value) {
         console.log(`${key} preference saved: ${value}`);
     });
 }
-
-function updateClock() {
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, "0");
-    const minutes = now.getMinutes().toString().padStart(2, "0");
-    const seconds = now.getSeconds().toString().padStart(2, "0");
-    const timeString = `${hours}:${minutes}:${seconds}`;
-
-    const digitalClockElement = document.getElementById("digitalClock");
-    digitalClockElement.innerText = timeString;
-    digitalClockElement.setAttribute("font-family", "Long Cang");
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Initial update
-    updateClock();
-});
-
-// Update the clock every second
-setInterval(updateClock, 1000);
