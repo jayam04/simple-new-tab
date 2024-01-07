@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Simple New Tab",
-  "version": "1.0",
+  "version": "0.2-beta",
   "description": "Simple Tab with Digital Clock",
   "permissions": ["storage", "activeTab"],
   "browser_action": {
