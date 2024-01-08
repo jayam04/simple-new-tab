@@ -1,10 +1,13 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Simple New Tab",
   "version": "0.2-beta",
   "description": "Simple Tab with Digital Clock",
-  "permissions": ["storage", "activeTab"],
-  "browser_action": {
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "action": {
     "default_icon": {
       "16": "icons/icon16.jpg",
       "32": "icons/icon32.jpg",
@@ -28,4 +31,3 @@
     "256": "icons/icon256.jpg"
   }
 }
-
