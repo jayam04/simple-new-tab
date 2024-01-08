@@ -1,9 +1,9 @@
-import { getGoogleFontUrl } from "./helper.js";
+import {getGoogleFontUrl, setFontToElement, savePreference} from "./helper.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     // Load stored preferences on popup open
     chrome.storage.sync.get(
-        ["showMilliseconds", "use12HourFormat", "googleFont"],
+        ["showMilliseconds", "use12HourFormat", "googleFont", "fontSize"],
         function (result) {
             document.getElementById("showMilliseconds").checked =
                 result.showMilliseconds || false;
@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 result.use12HourFormat || false;
             document.getElementById("googleFontInput").value =
                 result.googleFont || "Roboto";
+            document.getElementById("fontSize").value = result.fontSize;
         }
     );
 
@@ -38,35 +39,18 @@ document.addEventListener("DOMContentLoaded", function () {
             const use12HourFormat = this.checked;
             savePreference("use12HourFormat", use12HourFormat);
         });
+
+    document
+        .getElementById("fontSize")
+        .addEventListener("change", function () {
+            savePreference("fontSize", document.getElementById("fontSize").value);
+            savePreference("fontSizeUpdated", true)
+        })
 });
 
 // Function to apply Google Font and save it to storage
 function applyGoogleFont(fontFamily, elementId) {
-    const fontStylesheet = document.createElement("link");
-    fontStylesheet.href = `https://fonts.googleapis.com/css2?family=${fontFamily.replace(
-        " ",
-        "+"
-    )}`;
-    fontStylesheet.rel = "stylesheet";
-    document.head.appendChild(fontStylesheet);
-
-    if (!elementId) {
-        elementId = "digitalClock";
-    }
-
-    // Apply the font to the clock element
-    const digitalClockElement = document.getElementById(elementId);
-    digitalClockElement.style.fontFamily = `'${fontFamily}', sans-serif`;
-
+    setFontToElement(fontFamily, elementId)
     savePreference("googleFont", fontFamily);
     savePreference("fontUpdated", true);
-}
-
-// Function to save a preference to Chrome storage
-function savePreference(key, value) {
-    const data = {};
-    data[key] = value;
-    chrome.storage.sync.set(data, function () {
-        console.log(`${key} preference saved: ${value}`);
-    });
 }
