@@ -1,4 +1,4 @@
-import {updateClock} from "./helper.js";
+import { updateClock, generatePastelColor } from "./helper.js";
 
 
 function updateClockNewTab(forceUpdateFont = false, forceUpdateFontSize = false) {
@@ -10,3 +10,6 @@ setInterval(updateClockNewTab, 10);
 
 // Initial update
 updateClockNewTab(true, true);
+
+// Update background
+document.body.style.backgroundColor = generatePastelColor();
