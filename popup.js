@@ -59,6 +59,7 @@ function applyGoogleFont(fontFamily, elementId) {
     digitalClockElement.style.fontFamily = `'${fontFamily}', sans-serif`;
 
     savePreference("googleFont", fontFamily);
+    savePreference("fontUpdated", true);
 }
 
 // Function to save a preference to Chrome storage

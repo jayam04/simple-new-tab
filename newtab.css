@@ -13,3 +13,9 @@ body {
   color: #333;
 }
 
+.settings {
+  border: red solid;
+  height: 50px;
+  width: 50px;
+}
+
