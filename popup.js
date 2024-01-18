@@ -60,6 +60,11 @@ document.addEventListener("DOMContentLoaded", function () {
         .addEventListener("change", function () {
             savePreference("refreshRate", document.getElementById("refreshrate").value);
         });
+    
+    document
+        .getElementById('goToFullSettings')
+        .addEventListener('click', redirect); 
+
 });
 
 // Function to apply Google Font and save it to storage
@@ -67,4 +72,9 @@ function applyGoogleFont(fontFamily, elementId) {
     setFontToElement(fontFamily, elementId)
     savePreference("googleFont", fontFamily);
     savePreference("fontUpdated", true);
+}
+
+function redirect() {
+    chrome.tabs.update({url: "settings.html"});
+    window.close();
 }

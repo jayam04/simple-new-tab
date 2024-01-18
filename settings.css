@@ -1,0 +1,32 @@
+* {
+    font-family: 'Salsa', 'Roboto', sans-serif;
+}
+
+h2 {
+    margin-bottom: 8px;
+    margin-top: 30px;
+}
+
+div {
+    font-size: 13px;
+}
+
+
+#tab-div {
+    color: #e679d2;
+}
+#perf-div {
+    color: #ab8be3;
+}
+
+#clock-div {
+    color: #5f9ea0;
+}
+
+#font-div {
+    color: #87b97c;
+}
+
+#preview-div {
+    color: #666;
+}
