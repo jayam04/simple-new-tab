@@ -1,43 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="settings.css" />
-    <link
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="settings.css" />
+        <link
             href="https://fonts.googleapis.com/css2?family=Salsa&family=Long+Cang&family=Roboto&display=swap"
             rel="stylesheet"
-    />
-    <title>Settings</title>
-</head>
-<body>
-    <h1 id="main-heading">Simple New Tab</h1>
-    <hr />
-    <div style="display: flex; flex-direction: row;">
-        <div style="width: 60%;">
-            <div id="tab-div">
-                <h2>Tab</h2>
-                Tab Title <input>
+        />
+        <title>Settings</title>
+    </head>
+    <body>
+        <h1 id="main-heading">Simple New Tab</h1>
+        <hr />
+        <div style="display: flex; flex-direction: row">
+            <div style="width: 60%">
+                <div id="tab-div">
+                    <h2>Tab</h2>
+                    Tab Title:
+                    <input />
+                    <br />
+                    Color Theme:
+                    <select>
+                        <option>Pastel</option>
+                        <option>Custom</option>
+                    </select>
+                    #TODO: Input for custom color theme
+                </div>
+                <div id="perf-div">
+                    <h2>Performance</h2>
+                    Refresh Rate:
+                    <input type="number" id="refreshrate" style="width: 40px" />
+                    <p style="color: coral; margin-top: 3px">
+                        Refresh Rate will not updated in current new tabs,
+                        changes will be reflected in new tabs.
+                    </p>
+                </div>
+                <div id="clock-div">
+                    <h2>Clock</h2>
+                    <input type="checkbox" id="showMilliseconds" />
+                    Show Seconds
+                    <br />
+                    <input type="checkbox" id="use12HourFormat" />
+                    Use 12-Hour Clock
+                </div>
+                <div id="font-div">
+                    <h2>Font</h2>
+                    Font Size:
+                    <input type="number" id="fontSize" style="width: 40px" />
+                    <br />
+                    Font Family:
+                    <input
+                        type="text"
+                        id="googleFontInput"
+                        placeholder="Google Font Family"
+                    />
+                    <p style="color: coral; margin-top: 3px">
+                        Font Family should be exact as in Google Fonts,
+                        including spaces, and is also case-sensitive
+                    </p>
+                </div>
             </div>
-            <div id="perf-div">
-                <h2>Performance</h2>
-                Refresh Rate: <input type="number" id="refreshrate" style="width: 40px;" />
-                <p style="color: coral; margin-top: 3px;">Refresh Rate will not updated in current new tabs, changes will be reflected in new tabs.</p>
-            </div>
-            <div id="clock-div">
-                <h2>Clock</h2>
-            </div>
-            <div id="font-div">
-                <h2>Font</h2>
+            <div>
+                <div id="preview-div">
+                    <h2>Preview</h2>
+                    <p style="color: coral; margin-top: 3px">
+                        Maximum Font Size in PREVIEW can be achived upto 300px.
+                    </p>
+                </div>
             </div>
         </div>
-        <div>
-            <div id="preview-div">
-                <h2>Preview</h2>
-                <p style="color: coral; margin-top: 3px;">Maximum Font Size in PREVIEW can be achived upto 300px.</p>
-            </div>
-        </div>
-    </div>
-    <script src="settings.js" type="module"></script>
-</body>
+        <script src="settings.js" type="module"></script>
+    </body>
 </html>
