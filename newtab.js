@@ -15,8 +15,16 @@ chrome.storage.sync.get(['newTabName'], function (result) {
     }
 });
 
+// Update the clock by refresh rate set in settings page.
+chrome.storage.sync.get(["refreshRate"], function (result) {
+    if (result.refreshRate == undefined) {
+        result.refreshRate = 5;
+    }
+    setInterval(updateClockNewTab, (1000 / result.refreshRate));
+})
+
 // Update the clock every second
-setInterval(updateClockNewTab, 10);
+// setInterval(updateClockNewTab, 10);
 
 // Initial update
 updateClockNewTab(true, true);

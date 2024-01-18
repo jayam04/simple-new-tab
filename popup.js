@@ -3,7 +3,7 @@ import {getGoogleFontUrl, setFontToElement, savePreference} from "./helper.js";
 document.addEventListener("DOMContentLoaded", function () {
     // Load stored preferences on popup open
     chrome.storage.sync.get(
-        ["showMilliseconds", "use12HourFormat", "googleFont", "fontSize", "newTabName"],
+        ["showMilliseconds", "use12HourFormat", "googleFont", "fontSize", "newTabName", "refreshRate"],
         function (result) {
             document.getElementById("showMilliseconds").checked =
                 result.showMilliseconds || false;
@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 result.googleFont || "Roboto";
             document.getElementById("fontSize").value = result.fontSize;
             document.getElementById("newTabName").value = result.newTabName;
+            document.getElementById("refreshrate").value = result.refreshRate || 5;
         }
     );
 
@@ -53,7 +54,12 @@ document.addEventListener("DOMContentLoaded", function () {
         .addEventListener("change", function () {
             savePreference("fontSize", document.getElementById("fontSize").value);
             savePreference("fontSizeUpdated", true)
-        })
+        });
+    document
+        .getElementById("refreshrate")
+        .addEventListener("change", function () {
+            savePreference("refreshRate", document.getElementById("refreshrate").value);
+        });
 });
 
 // Function to apply Google Font and save it to storage
