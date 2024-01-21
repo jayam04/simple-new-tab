@@ -7,12 +7,10 @@ function updateClockNewTab(forceUpdateFont = false, forceUpdateFontSize = false)
 
 // Update Tab Name
 chrome.storage.sync.get(['newTabName'], function (result) {
-    if (result.newTabName != undefined) {
-        document.title = result.newTabName;
+    if (!result.newTabName) {
+        result.newTabName = "Simple New Tab ✨"
     }
-    else {
-        document.title = "Simple New Tab ✨"
-    }
+    document.title = result.newTabName;
 });
 
 // Update the clock by refresh rate set in settings page.

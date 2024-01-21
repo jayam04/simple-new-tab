@@ -15,6 +15,19 @@
         <hr />
         <div style="display: flex; flex-direction: row">
             <div style="width: 60%">
+                <div>
+                    <input type="checkbox" id="auto-save-settings" />
+                    Auto Save Settings
+                </div>
+                <div id="extension-div">
+                    <h2>Extension</h2>
+                    <input type="checkbox" id="chrome-sync" />
+                    Sync across Chrome Profiles
+                    <!-- <p style="color: red; margin-top: 3px;">Decreases Performance</p> -->
+                    <br>
+                    <input type="checkbox" id="realtime-sync" />
+                    Sync settings in realtime
+                </div>
                 <div id="tab-div">
                     <h2>Tab</h2>
                     Tab Title:
@@ -23,16 +36,14 @@
                     Color Theme:
                     <select>
                         <option>Pastel</option>
-                        <option>Custom</option>
                     </select>
-                    #TODO: Input for custom color theme
                 </div>
                 <div id="perf-div">
                     <h2>Performance</h2>
                     Refresh Rate:
                     <input type="number" id="refreshrate" style="width: 40px" />
-                    <p style="color: coral; margin-top: 3px">
-                        Refresh Rate will not updated in current new tabs,
+                    <p class="warning">
+                        Refresh Rate will not updated in current tabs,
                         changes will be reflected in new tabs.
                     </p>
                 </div>
@@ -55,21 +66,26 @@
                         id="googleFontInput"
                         placeholder="Google Font Family"
                     />
-                    <p style="color: coral; margin-top: 3px">
+                    <p class="warning" >
                         Font Family should be exact as in Google Fonts,
                         including spaces, and is also case-sensitive
                     </p>
+                </div>
+                <div>
+                    <button id="save-button">Save Changes</button>
                 </div>
             </div>
             <div>
                 <div id="preview-div">
                     <h2>Preview</h2>
-                    <p style="color: coral; margin-top: 3px">
+                    <p class="warning">
                         Maximum Font Size in PREVIEW can be achived upto 300px.
+                        <div class="clock" id="digitalClock"></div>
                     </p>
                 </div>
             </div>
         </div>
         <script src="settings.js" type="module"></script>
+        <script src="popup.js" type="module"></script>
     </body>
 </html>

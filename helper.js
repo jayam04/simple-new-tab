@@ -81,10 +81,10 @@ export function updateClock(elementId, forceUpdateFont = false, forceUpdateFontS
     );
 }
 
-export function generatePastelColor() {
+export function generatePastelColor(minLightness = 0.8, minSaturation = 0.5) {
     // Pastel colors typically have lower saturation and brightness
-    const saturation = Math.random() * 0.4 + 0.5; // Range: 0.5 to 0.9
-    const lightness = Math.random() * 0.15 + 0.8; // Range: 0.8 to 9.5
+    const saturation = Math.random() * 0.4 + minSaturation; // Range: 0.5 to 0.9
+    const lightness = Math.random() * 0.15 + minLightness; // Range: 0.8 to 9.5
 
     // Convert HSL to RGB
     const hue = Math.random() * 360;
@@ -93,6 +93,7 @@ export function generatePastelColor() {
 
     // Convert RGB to hex
     const hexColor = rgbToHex(rgbColor[0], rgbColor[1], rgbColor[2]);
+    console.log("HSL Color:", hslColor);
 
     return hexColor;
 }

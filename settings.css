@@ -11,35 +11,45 @@ div {
     font-size: 13px;
 }
 
+p {
+    margin-top: 3px;
+}
+
+.warning {
+    color: red;
+}
+
+button {
+    padding: 0px 4px;
+    border: solid 1px;
+    border-radius: 7px;
+    margin: 2px 0px;
+}
+
+#save-button {
+    margin-top: 20px;
+    font-size: medium;
+    padding: 2px 7px;
+}
 input {
     padding-left: 4px;
     border: solid 1px;
     border-radius: 7px;
-    margin: 3px 0px;
+    margin: 2px 0px;
 }
 
 select {
     padding-left: 4px;
     border: solid 1px;
     border-radius: 7px;
+    margin: 2px 0px;
 }
 
 
-#tab-div {
-    color: #e679d2;
-}
-#perf-div {
-    color: #ab8be3;
-}
 
-#clock-div {
-    color: #5f9ea0;
-}
-
-#font-div {
-    color: #87b97c;
-}
-
-#preview-div {
-    color: #666;
+#digitalClock {
+    border: #666 solid 1px;
+    width: 100%;
+    border-radius: 11px;
+    min-height: 50px;
 }
