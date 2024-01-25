@@ -25,9 +25,8 @@ body {
   left: 0;
   width: 100vw; /* Full viewport width */
   height: 100vh; /* Full viewport height */
-  background-image: url('/img/noise-medium.jpg'); /* Replace with the path to your 50px * 50px image */
-  background-size: 100px 100px; /* Size of your small image */
+  background-image: url('/img/noise/noise-dark.png'); /* Replace with the path to your 50px * 50px image */
+  background-size: 220px; /* Size of your small image */
   background-repeat: repeat; /* Repeat the image both horizontally and vertically */
   z-index: -1; /* Place the background behind other elements */
-  opacity: 0.08;
 }
