@@ -1,4 +1,4 @@
-import {updateClock} from "./helper.js";
+import { updateClockDisplay } from './helper.js';
 
 // function updateClock() {
 //     const now = new Date();
@@ -11,13 +11,13 @@ import {updateClock} from "./helper.js";
 //     digitalClockElement.innerText = timeString;
 // }
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Initial update
-    updateClockPopUp(true)
+document.addEventListener('DOMContentLoaded', function () {
+  // Initial update
+  updateClockPopUp(true);
 });
 
 function updateClockPopUp(forceUpdateFont = false) {
-    updateClock("digitalClock", forceUpdateFont);
+  updateClockDisplay('digitalClock', forceUpdateFont);
 }
 // Update the clock every second
 setInterval(updateClockPopUp, 100);
