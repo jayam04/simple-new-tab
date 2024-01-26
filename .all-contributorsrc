@@ -1,4 +1,21 @@
 {
   "projectName": "simple-new-tab",
-  "projectOwner": "jayam04"
+  "projectOwner": "jayam04",
+  "files": [
+    "README.md"
+  ],
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributorsPerLine": 7,
+  "contributors": [
+    {
+      "login": "jayam04",
+      "name": "Jayam Patel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/93824505?v=4",
+      "profile": "http://jayampatel.vercel.app",
+      "contributions": [
+        "code"
+      ]
+    }
+  ]
 }
