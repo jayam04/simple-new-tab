@@ -10,3 +10,14 @@ export const NOISE_PATTERN_DIR = "/img/noise";
 export const SYNC_SETTINGS_IN_REALTIME = "syncSettingsInRealtime";
 export const IS_AUTO_SAVE_ON = "isAutoSaveOn";
 export const IS_CHROME_SYNC_ON = "isChromeSyncOn";
+
+
+// default values
+export const DEFAULT_SETTINGS = {
+    googleFont: "PT Serif",
+    fontSize: "50px",
+    showMilliseconds: true,
+    use12HourFormat: false,
+    fontUpdated: false,
+    fontSizeUpdated: false
+}

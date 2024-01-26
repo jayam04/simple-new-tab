@@ -30,3 +30,11 @@ export function syncSettingsInRealtime() {
   }
   return settingsSync;
 }
+
+// Get config for every item in items from chrome storage
+export function getFromStorage(items) {
+  let requiredResult = {};
+  chrome.storage.sync.get(items, (result) => {
+    requiredResult = result;
+  });
+}
