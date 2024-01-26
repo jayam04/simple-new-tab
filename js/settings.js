@@ -1,11 +1,11 @@
-import { generatePastelColor, updateClock } from "./helper.js";
+import { generatePastelColor } from "./helper.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const heading = document.getElementById("main-heading");
 
     heading.addEventListener("mouseenter", () => {
         let interval = setInterval(() => {
-            heading.style.color = generatePastelColor(0.4, 0.5);
+            heading.style.color = generatePastelColor();
         }, 500);
 
         heading.addEventListener("mouseleave", () => {

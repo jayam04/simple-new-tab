@@ -112,9 +112,17 @@ export const updateClockDisplay = async ({
  */
 
 export const generatePastelColor = (
-  minLightness = 0.8,
-  minSaturation = 0.5,
+  lightColors = true
 ) => {
+  let minLightness, minSaturation;
+  if (!lightColors) {
+    minLightness = 0.2;
+    minSaturation = 0.1;
+  }
+  else {
+    minLightness = 0.8;
+    minSaturation = 0.5;
+  }
   const saturation = Math.random() * 0.4 + minSaturation;
   const lightness = Math.random() * 0.15 + minLightness;
   const hue = Math.random() * 360;
