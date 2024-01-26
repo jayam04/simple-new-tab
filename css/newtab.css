@@ -30,3 +30,21 @@ body {
   background-repeat: repeat; /* Repeat the image both horizontally and vertically */
   z-index: -1; /* Place the background behind other elements */
 }
+
+#quick-settings {
+  display: flex;
+  background-color: #fff;
+  min-width: 10px;
+  padding: 0px 10px;
+  height: 30px;
+  position: absolute;
+  align-self: self-end;
+  opacity: .05;
+  border-radius: 15px;
+  margin: 5px;
+  margin-left: auto;
+}
+
+#quick-settings:hover {
+  opacity: .6;
+}
