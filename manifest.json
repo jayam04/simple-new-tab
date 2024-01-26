@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Simple New Tab ✨ (Highly Customizable)",
+    "name": "Simple New Tab ✨: Highly Customizable, Pastel Tabs",
     "version": "2.0",
     "description": "Minimalistic new tab with random pastel tab with options to add noise to background, clock, custom google font, performance settings, and much more.",
     "permissions": [
