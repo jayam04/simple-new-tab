@@ -9,6 +9,15 @@
   "contributorsPerLine": 7,
   "contributors": [
     {
+      "login": "jayam04",
+      "name": "Jayam Patel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/93824505?v=4",
+      "profile": "http://jayampatel.vercel.app",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "ayushkavad",
       "name": "Ayush Kavad",
       "avatar_url": "https://avatars.githubusercontent.com/u/69857046?v=4",
