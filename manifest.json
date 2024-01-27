@@ -1,33 +1,28 @@
 {
-    "manifest_version": 3,
-    "name": "Simple New Tab ✨: Highly Customizable, Pastel Tabs",
-    "version": "2.0",
-    "description": "Minimalistic new tab with random pastel tab with options to add noise to background, clock, custom google font, performance settings, and much more.",
-    "permissions": [
-        "storage"
-    ],
-    "optional_permissions": [
-        "bookmarks"
-    ],
-    "action": {
-        "default_icon": {
-            "48": "icons/icon48.png",
-            "64": "icons/icon64.png",
-            "128": "icons/icon128.png",
-            "256": "icons/icon256.png",
-            "500": "icons/icon500.png"
-        },
-        "default_title": "Simple New Tab ✨",
-        "default_popup": "popup.html"
+  "manifest_version": 3,
+  "name": "Simple New Tab ✨: Highly Customizable, Pastel Tabs",
+  "version": "2.0",
+  "description": "Minimalistic new tab with random pastel tab with options to add noise to background, clock, custom google font, performance settings, and much more.",
+  "permissions": ["storage"],
+  "optional_permissions": ["bookmarks"],
+  "action": {
+    "default_icon": {
+      "48": "icons/icon48.png",
+      "64": "icons/icon64.png",
+      "128": "icons/icon128.png",
+      "256": "icons/icon256.png",
+      "500": "icons/icon500.png"
     },
-    "chrome_url_overrides": {
-        "newtab": "newtab.html"
-    },
-    "icons": {
-        "48": "icons/icon48.png",
-        "64": "icons/icon64.png",
-        "128": "icons/icon128.png",
-        "256": "icons/icon256.png",
-        "500": "icons/icon500.png"
-    }
+    "default_title": "Simple New Tab ✨"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "icons": {
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png",
+    "256": "icons/icon256.png",
+    "500": "icons/icon500.png"
+  }
 }

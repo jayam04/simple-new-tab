@@ -1,3 +1,5 @@
+import { DEFAULT_SETTINGS } from './constants.js';
+
 import {
   applyFontToElement,
   applyFontSizeToElement,
