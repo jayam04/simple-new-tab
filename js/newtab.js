@@ -1,37 +1,52 @@
-import { DEFAULT_TAB_NAME } from './config/config.js';
-import { updateClockDisplay, generatePastelColor } from './helper.js';
-
-const modal = document.querySelector('.modal');
-const overlay = document.querySelector('.overlay');
-const btnCloseModal = document.querySelector('.close-modal');
-const btnsOpenModal = document.querySelector('.show-modal');
-const link1 = document.getElementById('link1');
-const link2 = document.getElementById('link2');
-
-const openModal = function () {
-  modal.classList.remove('hidden');
-  overlay.classList.remove('hidden');
-};
-
-const closeModal = function () {
-  modal.classList.add('hidden');
-  overlay.classList.add('hidden');
-};
+import {
+  applyFontToElement,
+  applyFontSizeToElement,
+  savePreference,
+  getFormattedTime,
+  generatePastelColor,
+} from './helper.js';
 
 const updateDigitalClockNewTab = async ({
   forceUpdateFont = false,
   forceUpdateFontSize = false,
 } = {}) => {
-  await updateClockDisplay({
-    elementId: 'digitalClockNewTab',
-    forceUpdateFont,
-    forceUpdateFontSize,
-  });
+  const storageFields = [
+    'showMilliseconds',
+    'use12HourFormat',
+    'fontFamily',
+    'refreshRate',
+    'fontSizeUpdated',
+    'fontSize',
+  ];
+
+  const {
+    showMilliseconds,
+    use12HourFormat,
+    fontFamily,
+    fontUpdated,
+    fontSize,
+    fontSizeUpdated,
+  } = await chrome.storage.sync.get(storageFields);
+
+  if (forceUpdateFont || fontUpdated) {
+    applyFontToElement('digitalClockNewTab', fontFamily);
+    savePreference('fontUpdated', false);
+  }
+
+  if (forceUpdateFontSize || fontSizeUpdated) {
+    applyFontSizeToElement(fontSize, 'digitalClockNewTab');
+  }
+
+  const formattedTime = getFormattedTime(use12HourFormat, showMilliseconds);
+
+  const clockElement = document.getElementById('digitalClockNewTab');
+  clockElement.innerText = formattedTime;
+  clockElement.style.fontFamily = `'${fontFamily}', 'Roboto'`;
 };
 
 const updateTabTitle = async () => {
   const { newTabName } = await chrome.storage.sync.get(['newTabName']);
-  document.title = newTabName || DEFAULT_TAB_NAME;
+  document.title = newTabName || DEFAULT_SETTINGS.DEFAULT_TAB_NAME;
 };
 
 const setRefreshInterval = async () => {
@@ -40,29 +55,6 @@ const setRefreshInterval = async () => {
 };
 
 const initializeNewTab = async () => {
-  btnsOpenModal.addEventListener('click', openModal);
-  btnCloseModal.addEventListener('click', closeModal);
-  overlay.addEventListener('click', closeModal);
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-      closeModal();
-    }
-  });
-
-  link1.addEventListener('click', function () {
-    document.getElementById('main-heading').innerText = 'General Settings ✨';
-    document.getElementById('content1').classList.remove('hidden');
-    document.getElementById('content2').classList.add('hidden');
-  });
-
-  link2.addEventListener('click', function () {
-    document.getElementById('main-heading').innerText =
-      'Extensions Settings ✨';
-    document.getElementById('content1').classList.add('hidden');
-    document.getElementById('content2').classList.remove('hidden');
-  });
-
   document.body.style.backgroundColor = generatePastelColor();
 
   await updateDigitalClockNewTab({

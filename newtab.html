@@ -8,6 +8,8 @@
       href="https://fonts.googleapis.com/css2?family=Salsa&family=Long+Cang&family=Roboto&display=swap"
       rel="stylesheet"
     />
+    <script defer src="./js/modal.js" type="module"></script>
+    <script defer src="./js/settings.js" type="module"></script>
     <script defer src="./js/newtab.js" type="module"></script>
     <style>
       .hidden {
@@ -21,7 +23,7 @@
     <div id="quick-settings">
       <img src="img/icons/cog.svg" class="show-modal" />
     </div>
-    <div class="modal">
+    <div class="modal hidden">
       <button class="close-modal">&times;</button>
       <h1 id="main-heading">General Settings ✨</h1>
       <hr style="border: solid 1px" />
@@ -38,37 +40,21 @@
         <div>
           <h2>Clock Settings</h2>
           <div class="setting">
-            <input type="checkbox" id="sync-profiles" />
-            <label for="sync-profiles">Show Seconds </label>
+            <input type="checkbox" id="showMilliseconds" />
+            <label for="showMilliseconds">Show Seconds </label>
           </div>
 
           <div class="setting">
-            <input type="checkbox" id="realtime-sync" />
-            <label for="realtime-sync">Use 12-Hour Clock</label>
+            <input type="checkbox" id="use12HourFormat" />
+            <label for="use12HourFormat">Use 12-Hour Clock</label>
           </div>
         </div>
 
         <div>
           <h2>Tab Settings</h2>
           <div class="setting">
-            <label for="tabTitle">Tsb Title:</label>
-            <input type="text" id="tabTitle" />
-          </div>
-
-          <div class="setting">
-            <label for="fontFamily">Color theme:</label>
-            <select id="fontFamily">
-              <option value="Pastel">Pastel</option>
-            </select>
-          </div>
-
-          <div class="setting">
-            <label for="fontFamily">Noice:</label>
-            <select id="fontFamily">
-              <option value="None">None</option>
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-            </select>
+            <label for="newTabName">Tab Title:</label>
+            <input type="text" id="newTabName" />
           </div>
         </div>
 
@@ -84,15 +70,16 @@
               <option value="Roboto">Roboto</option>
               <option value="Salsa">Salsa</option>
               <option value="Long Cang">Long Cang</option>
+              <option value="Sixtyfour">Sixtyfour</option>
             </select>
           </div>
+        </div>
 
+        <div>
+          <h2>Refresh Rate</h2>
           <div class="setting">
-            <label for="clockFormat">Clock Format:</label>
-            <select id="clockFormat">
-              <option value="12">12-Hour</option>
-              <option value="24">24-Hour</option>
-            </select>
+            <label for="refreshRate">Refresh Rate:</label>
+            <input type="number" id="refreshRate" />
           </div>
         </div>
       </div>
@@ -107,14 +94,6 @@
         <div class="setting">
           <input type="checkbox" id="realtime-sync" />
           <label for="realtime-sync">Sync settings in realtime</label>
-        </div>
-
-        <div>
-          <h2>Performance Settings</h2>
-          <div class="setting">
-            <label for="fontSize">Refresh Rate:</label>
-            <input type="number" id="refreshRate" />
-          </div>
         </div>
       </div>
     </div>
