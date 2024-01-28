@@ -22,12 +22,19 @@ export const SECTIONS = [
     }
 ]
 
+export const EXTENSION = {
+    "name": "Simple New Tab ✨",
+    "description": "Simple, but highly customizable new tabs."
+}
+
+
 // Colors
 export const COLORS = {
     "primary": "#0097B2",
     "secondary": "#7ED957",
     "tertiary": "#ffffff"
 }
+
 
 // Defaults
 export const DEFAULT_SETTINGS = {
