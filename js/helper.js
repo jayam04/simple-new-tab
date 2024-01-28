@@ -1,22 +1,22 @@
-import { GOOGLE_FONT_BASE_URL } from './constants.js';
+import { FONT, TABS_IN_DIALOG } from "../migration/js/constants.js";
 
 export const getFormattedTime = (use12HourFormat, displaySeconds) => {
   const now = new Date();
-  let hours = now.getHours().toString().padStart(2, '0');
-  let minutes = now.getMinutes().toString().padStart(2, '0');
-  let seconds = now.getSeconds().toString().padStart(2, '0');
-  let ampm = '';
+  let hours = now.getHours().toString().padStart(2, "0");
+  let minutes = now.getMinutes().toString().padStart(2, "0");
+  let seconds = now.getSeconds().toString().padStart(2, "0");
+  let ampm = "";
   if (!displaySeconds) {
-    seconds = '';
+    seconds = "";
   } else {
     seconds = `:${seconds}`;
   }
   if (use12HourFormat) {
     if (hours > 12) {
       hours -= 12;
-      ampm = ' PM';
+      ampm = " PM";
     } else {
-      ampm = ' AM';
+      ampm = " AM";
     }
   }
   return `${hours}:${minutes}${seconds}${ampm}`;
@@ -34,32 +34,39 @@ export const savePreference = async (key, value) => {
 };
 
 export const getGoogleFontUrl = (fontName) => {
-  const fontURL = `${GOOGLE_FONT_BASE_URL}?family=${fontName.replace(
-    ' ',
-    '+',
+  const fontURL = `${FONT.googleFontBaseUrl}?family=${fontName.replace(
+    " ",
+    "+"
   )}:wght@400;700&display=swap`;
   const importURL = `@import url('${fontURL}');`;
   return importURL;
 };
 
 export const applyFontToElement = (elementId, fontName) => {
-  const fontStylesheet = document.createElement('link');
+  const fontStylesheet = document.createElement("link");
 
-  if (!fontName.includes(' ')) {
-    fontStylesheet.href = `${GOOGLE_FONT_BASE_URL}?family=${fontName}`;
+  if (!fontName.includes(" ")) {
+    fontStylesheet.href = `${FONT.googleFontBaseUrl}?family=${fontName}`;
   } else {
-    fontStylesheet.href = `${GOOGLE_FONT_BASE_URL}?family=${fontName.replace(
-      ' ',
-      '+',
+    fontStylesheet.href = `${FONT.googleFontBaseUrl}?family=${fontName.replace(
+      " ",
+      "+"
     )}`;
   }
-  fontStylesheet.rel = 'stylesheet';
+  fontStylesheet.rel = "stylesheet";
   document.head.appendChild(fontStylesheet);
 
   const digitalClockElement = document.getElementById(elementId);
   digitalClockElement.style.fontFamily = `'${fontName}', 'Roboto', sans-serif`;
 };
 
+/**
+ * Generates a random pastel color.
+ * Pastel colors typically have lower saturation and brightness.
+ *
+ * @param {boolean} [lightColors = true] - Use light mode or dark mode.
+ * @returns {string} - Hexadecimal representation of the generated pastel color.
+ */
 export const generatePastelColor = (lightColors = true) => {
   let minLightness, minSaturation;
   if (!lightColors) {
@@ -107,8 +114,15 @@ const hslToRgb = (h, s, l) => {
 const rgbToHex = (r, g, b) => {
   const toHex = (value) => {
     const hex = value.toString(16);
-    return hex.length === 1 ? '0' + hex : hex;
+    return hex.length === 1 ? "0" + hex : hex;
   };
 
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+};
+
+export const updateTabInDialog = (tabNumber) => {
+  document.getElementById("main-heading").innerText =
+    TABS_IN_DIALOG[tabNumber]["heading"];
+  // TODO: update background of division
+  // TODO: change content class to hidden and remove hidden
 };

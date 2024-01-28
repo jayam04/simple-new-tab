@@ -1,3 +1,7 @@
+* {
+  font-family: 'Salsa', 'Roboto', sans-serif;
+}
+
 body {
   margin: 0;
   display: flex;
@@ -6,18 +10,31 @@ body {
   height: 100vh;
   background-color: #f4f4f4;
   letter-spacing: 0.9px;
-  font-family: 'Salsa', 'Roboto', sans-serif;
+  font-family: "Salsa", "Roboto", sans-serif;
 }
 
 .clock {
   font-size: 100px;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   color: #333;
 }
 
 .setting {
   display: flex;
   align-items: center;
+}
+input {
+  padding-left: 4px;
+  border: solid 1px;
+  border-radius: 7px;
+  margin: 2px 0px;
+}
+
+select {
+  padding-left: 4px;
+  border: solid 1px;
+  border-radius: 7px;
+  margin: 2px 0px;
 }
 
 .background-container {
@@ -26,7 +43,7 @@ body {
   left: 0;
   width: 100vw; /* Full viewport width */
   height: 100vh; /* Full viewport height */
-  background-image: url('/img/noise/noise-dark.png'); /* Replace with the path to your 50px * 50px image */
+  background-image: url("/img/noise/noise-dark.png"); /* Replace with the path to your 50px * 50px image */
   background-size: 220px; /* Size of your small image */
   background-repeat: repeat; /* Repeat the image both horizontally and vertically */
   z-index: -1; /* Place the background behind other elements */
@@ -97,4 +114,18 @@ body {
 
 .modal-content {
   margin-top: 12px;
+}
+
+.tab-selection {
+  margin: 0px 2px;
+  padding: 1px 6px;
+  border-radius: 2px;
+}
+
+.tab-selection:hover {
+  background-color: aquamarine;
+}
+
+.tab-selection-selected {
+  background-color: aquamarine;
 }

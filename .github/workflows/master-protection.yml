@@ -1,0 +1,27 @@
+name: Validate Manifest Version
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  validate_manifest_version:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Validate Manifest Version
+      run: |
+        # Parse manifest.json and extract the version
+        MANIFEST_VERSION=$(jq -r .version manifest.json)
+
+        # Validate the version format using a regular expression
+        if [[ ! $MANIFEST_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          echo "Error: Invalid version format in manifest.json. Must be in the format x.y.z"
+          exit 1
+        fi
+
+        echo "Valid version format: $MANIFEST_VERSION"

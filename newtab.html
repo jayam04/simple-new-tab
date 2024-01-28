@@ -16,20 +16,31 @@
         display: none;
       }
     </style>
+    <title>Simple New Tab ✨</title>
   </head>
   <body>
+    <!--  Main Page  -->
     <div class="clock" id="digitalClockNewTab"></div>
     <div class="background-container"></div>
     <div id="quick-settings">
-      <img src="img/icons/cog.svg" class="show-modal" />
+      <img src="img/icons/cog.svg" class="show-modal" alt="all settings" />
     </div>
     <div class="modal hidden">
       <button class="close-modal">&times;</button>
       <h1 id="main-heading">General Settings ✨</h1>
       <hr style="border: solid 1px" />
 
-      <a href="#" id="link1">General Settings</a>
-      <a href="#" id="link2">Extensions Settings</a>
+      <div id="section-headings" style="display: flex">
+        <div class="tab-selection tab-selection-selected" id="link1-div">
+          <a href="#" id="link1">General</a>
+        </div>
+        <div class="tab-selection" id="link2-div">
+          <a href="#" id="link2">Extensions</a>
+        </div>
+        <div class="tab-selection" id="link3-div">
+          <a href="#" id="link3">Attributes</a>
+        </div>
+      </div>
 
       <div id="content1" class="modal-content">
         <div class="setting">
