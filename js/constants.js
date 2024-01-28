@@ -21,3 +21,10 @@ export const DEFAULT_SETTINGS = {
     fontUpdated: false,
     fontSizeUpdated: false
 }
+
+// tabs in dialog
+export const TABS_IN_DIALOG = [
+    {"heading": "General Settings ✨"},
+    {"heading": "Extensions Settings ✨"},
+    {"heading": "About ✨"},
+]

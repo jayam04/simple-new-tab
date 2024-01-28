@@ -1,5 +1,5 @@
 import { DEFAULT_TAB_NAME } from './config/config.js';
-import { updateClockDisplay, generatePastelColor } from './helper.js';
+import { updateClockDisplay, generatePastelColor, updateTabInDialog } from './helper.js';
 
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
@@ -7,6 +7,7 @@ const btnCloseModal = document.querySelector('.close-modal');
 const btnsOpenModal = document.querySelector('.show-modal');
 const link1 = document.getElementById('link1');
 const link2 = document.getElementById('link2');
+const link3 = document.getElementById('link3');
 
 const openModal = function () {
   modal.classList.remove('hidden');
@@ -61,6 +62,10 @@ const initializeNewTab = async () => {
       'Extensions Settings ✨';
     document.getElementById('content1').classList.add('hidden');
     document.getElementById('content2').classList.remove('hidden');
+  });
+
+  link3.addEventListener('click', function () {
+    updateTabInDialog(2);
   });
 
   document.body.style.backgroundColor = generatePastelColor();

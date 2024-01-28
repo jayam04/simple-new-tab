@@ -1,5 +1,5 @@
 import { GOOGLE_FONT_BASE_URL } from "./config/config.js";
-import { DEFAULT_SETTINGS } from "./constants.js";
+import { DEFAULT_SETTINGS, TABS_IN_DIALOG } from "./constants.js";
 
 export const getFormattedTime = (use12HourFormat, displaySeconds) => {
     const now = new Date();
@@ -112,11 +112,9 @@ export const updateClockDisplay = async ({
  * Generates a random pastel color.
  * Pastel colors typically have lower saturation and brightness.
  *
- * @param {number} [minLightness=0.8] - Minimum lightness value (range: 0.8 to 9.5).
- * @param {number} [minSaturation=0.5] - Minimum saturation value (range: 0.5 to 0.9).
+ * @param {boolean} [lightColors = true] - Use light mode or dark mode.
  * @returns {string} - Hexadecimal representation of the generated pastel color.
  */
-
 export const generatePastelColor = (lightColors = true) => {
     let minLightness, minSaturation;
     if (!lightColors) {
@@ -169,3 +167,9 @@ const rgbToHex = (r, g, b) => {
 
     return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 };
+
+export const updateTabInDialog = (tabNumber) => {
+    document.getElementById('main-heading').innerText = TABS_IN_DIALOG[tabNumber]["heading"];
+    // TODO: update background of division
+    // TODO: change content class to hidden and remove hidden
+}
