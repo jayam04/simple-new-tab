@@ -1,5 +1,6 @@
-import { DEFAULT_TAB_NAME } from './config/config.js';
-import { updateClockDisplay, generatePastelColor, updateTabInDialog } from './helper.js';
+import {DEFAULT_TAB_NAME} from './config/config.js';
+import {generatePastelColor, updateClockDisplay, updateTabInDialog} from './helper.js';
+import {CLASSES, DEFAULT_SETTINGS, ELEMENTS, SECTIONS} from "../migration/js/constants.js";
 
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
@@ -8,6 +9,9 @@ const btnsOpenModal = document.querySelector('.show-modal');
 const link1 = document.getElementById('link1');
 const link2 = document.getElementById('link2');
 const link3 = document.getElementById('link3');
+
+// Constants for page
+let currentSection = DEFAULT_SETTINGS.section;
 
 const openModal = function () {
   modal.classList.remove('hidden');
@@ -78,4 +82,37 @@ const initializeNewTab = async () => {
   await setRefreshInterval();
 };
 
+const loadAllSectionSelection = () => {
+  // TODO: better name for `sectionHeadings`, also need to change constants.js based on it.
+  const sectionHeadings = document.getElementById(ELEMENTS.sectionHeadingsDiv);
+  for (let sectionsKey in SECTIONS) {
+      let sectionElement = document.createElement('div');
+      sectionElement.id = sectionsKey
+      sectionElement.classList.add(CLASSES.sectionSelection);
+      sectionElement.innerText = SECTIONS[sectionsKey].name;
+      // Event listener for element
+      sectionElement.addEventListener("click", handleSectionSelection)
+      // TODO: optimize it to add all children in one go.
+      sectionHeadings.appendChild(sectionElement);
+  }
+  // Mark default section as selected
+  document.getElementById(DEFAULT_SETTINGS.section).classList.add(CLASSES.selectedSection);
+}
+
+const handleSectionSelection = (event) => {
+  const selectedSection = event.target.id;
+  document.getElementById(selectedSection).classList.add(CLASSES.selectedSection);
+  if (currentSection) {
+      document.getElementById(currentSection).classList.remove(CLASSES.selectedSection);
+  }
+  currentSection = selectedSection;
+  // TODO: update heading
+  // TODO: update content, add/remove hidden things
+}
+
 initializeNewTab();
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadAllSectionSelection();
+  // TODO: load sections
+});

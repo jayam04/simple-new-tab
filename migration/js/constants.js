@@ -1,26 +1,26 @@
 // Names
-export const SECTIONS = [
-    {
+export const SECTIONS = {
+    "visual": {
         "id": "visual",
         "name": "🎨 Visual",
         "headingName": "🎨 Visual Settings"
     },
-    {
+    "behavioral": {
         "id": "behavioral",
         "name": "🔧 Behavioral",
         "headingName": "🔧 Behavioral Settings"
     },
-    {
+    "extension": {
         "id": "extension",
         "name": "⚙️ Extension",
         "headingName": "⚙️ Extension  Settings ✨"
     },
-    {
+    "about-us": {
         "id": "about-us",
         "name": "👥 About Us",
         "headingName": "👥 About ✨"
     }
-]
+}
 
 export const EXTENSION = {
     "name": "Simple New Tab ✨",
@@ -43,7 +43,27 @@ export const DEFAULT_SETTINGS = {
 
     // Visual
     "theme": "light",
-    "noise": "high"
+    "noise": "high",
 
     // Behavioral
+
+    // Extension
+    "section": "visual",
+}
+
+// Elements
+export const ELEMENTS = {
+    "digitalClock": "clock",
+    "analogClock": "clock",
+
+    "sectionHeadingsDiv": "section-headings"
+}
+
+export const CLASSES = {
+    "sectionSelection": "tab-selection",
+    "selectedSection": "tab-selection-selected",
+}
+
+export const IDS = {
+    "sectionHeading": "main-heading"
 }

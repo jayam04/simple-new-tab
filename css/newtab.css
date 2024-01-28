@@ -125,3 +125,7 @@ select {
 .tab-selection:hover {
   background-color: aquamarine;
 }
+
+.tab-selection-selected {
+  background-color: aquamarine;
+}
