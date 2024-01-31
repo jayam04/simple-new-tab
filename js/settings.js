@@ -21,22 +21,22 @@ const link3 = document.getElementById("link3");
 let currentSection = DEFAULT_SETTINGS.section;
 
 document.addEventListener("DOMContentLoaded", async function () {
-  link1.addEventListener("click", function () {
-    document.getElementById("main-heading").innerText = "General Settings ✨";
-    document.getElementById("content1").classList.remove("hidden");
-    document.getElementById("content2").classList.add("hidden");
-  });
+  // link1.addEventListener("click", function () {
+  //   document.getElementById("main-heading").innerText = "General Settings ✨";
+  //   document.getElementById("content1").classList.remove("hidden");
+  //   document.getElementById("content2").classList.add("hidden");
+  // });
 
-  link2.addEventListener("click", function () {
-    document.getElementById("main-heading").innerText =
-      "Extensions Settings ✨";
-    document.getElementById("content1").classList.add("hidden");
-    document.getElementById("content2").classList.remove("hidden");
-  });
+  // link2.addEventListener("click", function () {
+  //   document.getElementById("main-heading").innerText =
+  //     "Extensions Settings ✨";
+  //   document.getElementById("content1").classList.add("hidden");
+  //   document.getElementById("content2").classList.remove("hidden");
+  // });
 
-  link3.addEventListener("click", function () {
-    updateTabInDialog(2);
-  });
+  // link3.addEventListener("click", function () {
+  //   updateTabInDialog(2);
+  // });
 
   const storageFields = [
     "showMilliseconds",
@@ -74,7 +74,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   fontFamily.addEventListener("change", function () {
     const fontFamilyValue = this.value;
-    applyFontToElement("digitalClockNewTab", fontFamilyValue);
+    console.log(fontFamilyValue);
+    // applyFontToElement("digitalClockNewTab", fontFamilyValue);
     savePreference("fontFamily", fontFamilyValue);
   });
 
@@ -94,7 +95,7 @@ const loadAllSectionSelection = () => {
   // TODO: better name for `sectionHeadings`, also need to change constants.js based on it.
   const sectionHeadings = document.getElementById(ELEMENTS.sectionHeadingsDiv);
   for (let sectionsKey in SECTIONS) {
-    let sectionElement = document.createElement("div");
+    let sectionElement = document.createElement("h3");
     sectionElement.id = sectionsKey;
     sectionElement.classList.add(CLASSES.sectionSelection);
     sectionElement.innerText = SECTIONS[sectionsKey].name;
@@ -102,25 +103,44 @@ const loadAllSectionSelection = () => {
     sectionElement.addEventListener("click", handleSectionSelection);
     // TODO: optimize it to add all children in one go.
     sectionHeadings.appendChild(sectionElement);
+    document
+      .getElementById(`content-${sectionsKey}`)
+      .classList.add(CLASSES.hiddenContent);
   }
   // Mark default section as selected
   document
     .getElementById(DEFAULT_SETTINGS.section)
     .classList.add(CLASSES.selectedSection);
+  document
+    .getElementById(ELEMENTS.mainHeading)
+    .innerText = SECTIONS[DEFAULT_SETTINGS.section].headingName;
+  document
+    .getElementById(`content-${DEFAULT_SETTINGS.section}`)
+    .classList.remove(CLASSES.hiddenContent);
 };
 
 const handleSectionSelection = (event) => {
   const selectedSection = event.target.id;
+  if (selectedSection === currentSection) {
+    return;
+  }
   document
     .getElementById(selectedSection)
     .classList.add(CLASSES.selectedSection);
+  document
+    .getElementById(`content-${selectedSection}`)
+    .classList.remove(CLASSES.hiddenContent);
   if (currentSection) {
     document
       .getElementById(currentSection)
       .classList.remove(CLASSES.selectedSection);
+    document
+      .getElementById(`content-${currentSection}`)
+      .classList.add(CLASSES.hiddenContent);
   }
   currentSection = selectedSection;
   // TODO: update heading
+  document.getElementById(ELEMENTS.mainHeading).innerText = SECTIONS[currentSection].headingName;
   // TODO: update content, add/remove hidden things
 };
 

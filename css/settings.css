@@ -35,3 +35,7 @@ select {
 .tab-selection-selected {
   background-color: aquamarine;
 }
+
+.hidden-content {
+  visibility: collapse;
+}

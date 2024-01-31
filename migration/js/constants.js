@@ -63,12 +63,16 @@ export const TABS_IN_DIALOG = [
 export const ELEMENTS = {
   digitalClock: "clock",
   analogClock: "clock",
+
+  // settings.html
   sectionHeadingsDiv: "section-headings",
+  mainHeading: "main-heading",
 };
 
 export const CLASSES = {
   sectionSelection: "tab-selection",
   selectedSection: "tab-selection-selected",
+  hiddenContent: "hidden-content",
 };
 
 export const IDS = {
