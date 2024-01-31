@@ -8,107 +8,16 @@
       href="https://fonts.googleapis.com/css2?family=Salsa&family=Long+Cang&family=Roboto&display=swap"
       rel="stylesheet"
     />
-    <script defer src="./js/modal.js" type="module"></script>
-    <script defer src="./js/settings.js" type="module"></script>
     <script defer src="./js/newtab.js" type="module"></script>
-    <style>
-      .hidden {
-        display: none;
-      }
-    </style>
     <title>Simple New Tab ✨</title>
   </head>
   <body>
-    <!--  Main Page  -->
     <div class="clock" id="digitalClockNewTab"></div>
     <div class="background-container"></div>
     <div id="quick-settings">
-      <img src="img/icons/cog.svg" class="show-modal" alt="all settings" />
+      <a href="./settings.html" target="_blank">
+        <img src="img/icons/cog.svg" class="show-settings" alt="settings" />
+      </a>
     </div>
-    <div class="modal hidden">
-      <button class="close-modal">&times;</button>
-      <h1 id="main-heading">General Settings ✨</h1>
-      <hr style="border: solid 1px" />
-
-      <div id="section-headings" style="display: flex">
-        <div class="tab-selection tab-selection-selected" id="link1-div">
-          <a href="#" id="link1">General</a>
-        </div>
-        <div class="tab-selection" id="link2-div">
-          <a href="#" id="link2">Extensions</a>
-        </div>
-        <div class="tab-selection" id="link3-div">
-          <a href="#" id="link3">Attributes</a>
-        </div>
-      </div>
-
-      <div id="content1" class="modal-content">
-        <div class="setting">
-          <input type="checkbox" id="auto-save-settings" />
-          <label for="auto-save-settings">Auto Save Settings</label>
-        </div>
-
-        <div>
-          <h2>Clock Settings</h2>
-          <div class="setting">
-            <input type="checkbox" id="showMilliseconds" />
-            <label for="showMilliseconds">Show Seconds </label>
-          </div>
-
-          <div class="setting">
-            <input type="checkbox" id="use12HourFormat" />
-            <label for="use12HourFormat">Use 12-Hour Clock</label>
-          </div>
-        </div>
-
-        <div>
-          <h2>Tab Settings</h2>
-          <div class="setting">
-            <label for="newTabName">Tab Title:</label>
-            <input type="text" id="newTabName" />
-          </div>
-        </div>
-
-        <div>
-          <h2>Font Settings</h2>
-          <div class="setting">
-            <label for="fontSize">Font Size:</label>
-            <input type="number" id="fontSize" />
-          </div>
-          <div class="setting">
-            <label for="fontFamily">Font Family:</label>
-            <select id="fontFamily">
-              <option value="Roboto">Roboto</option>
-              <option value="Salsa">Salsa</option>
-              <option value="Long Cang">Long Cang</option>
-              <option value="Sixtyfour">Sixtyfour</option>
-            </select>
-          </div>
-        </div>
-
-        <div>
-          <h2>Refresh Rate</h2>
-          <div class="setting">
-            <label for="refreshRate">Refresh Rate:</label>
-            <input type="number" id="refreshRate" />
-          </div>
-        </div>
-      </div>
-
-      <!-- Content for link 2 (Extensions Settings) -->
-      <div id="content2" class="modal-content hidden">
-        <div class="setting">
-          <input type="checkbox" id="sync-profiles" />
-          <label for="sync-profiles">Sync across Chrome Profiles</label>
-        </div>
-
-        <div class="setting">
-          <input type="checkbox" id="realtime-sync" />
-          <label for="realtime-sync">Sync settings in realtime</label>
-        </div>
-      </div>
-    </div>
-
-    <div class="overlay hidden"></div>
   </body>
 </html>
