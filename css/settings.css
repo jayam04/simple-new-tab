@@ -37,5 +37,5 @@ select {
 }
 
 .hidden-content {
-  visibility: collapse;
+  display: none;
 }
