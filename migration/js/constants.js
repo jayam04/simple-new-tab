@@ -44,12 +44,13 @@ export const DEFAULT_SETTINGS = {
   chromeSync: true,
 
   // Visual
-  theme: "light",
+  theme: "pastel-light",
   noise: "high",
+  clockType: "12hr",
 
   // Behavioral
 
-  // Extension
+  // Extension (Settings Page)
   section: "visual",
 };
 
@@ -67,6 +68,10 @@ export const ELEMENTS = {
   // settings.html
   sectionHeadingsDiv: "section-headings",
   mainHeading: "main-heading",
+
+  // settings.html/visual
+  backgroundType: "background",
+  clockType: "clock-type",
 };
 
 export const CLASSES = {
@@ -78,3 +83,8 @@ export const CLASSES = {
 export const IDS = {
   sectionHeading: "main-heading",
 };
+
+export const EXTRAS = {
+  clockType: "clockType",
+  backgroundType: "theme",
+}

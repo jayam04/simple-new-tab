@@ -1,119 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/settings.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Salsa&family=Long+Cang&family=Roboto&display=swap"
-      rel="stylesheet"
-    />
-    <title>Settings ✨</title>
-    <script defer src="./js/settings.js" type="module"></script>
-  </head>
-  <body>
-    <h1 id="main-heading">General Settings ✨</h1>
-    <hr style="border: solid 1px" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./css/settings.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Salsa&family=Long+Cang&family=Roboto&display=swap"
+            rel="stylesheet"
+        />
+        <title>Settings ✨</title>
+        <script defer src="./js/settings.js" type="module"></script>
+    </head>
+    <body>
+        <h1 id="main-heading">General Settings ✨</h1>
+        <hr style="border: solid 1px" />
 
-    <div id="section-headings" style="display: flex"></div>
+        <div id="section-headings" style="display: flex"></div>
 
-    <div class="setting">
+        <!-- <div class="setting">
       <input type="checkbox" id="auto-save-settings" checked disabled />
       <label for="auto-save-settings">Auto Save Settings</label>
-    </div>
-    <div id="content-visual">
-      <div>
-        <h2>Clock Settings</h2>
-        <div class="setting">
-          <input type="checkbox" id="showMilliseconds" />
-          <label for="showMilliseconds">Show Seconds </label>
-        </div>
+    </div> -->
+        <div id="content-visual">
+            <div>
+              <!-- Background Settings -->
+                <h3>Background</h3>
+                <div>
+                    <label for="background">Background Colors: </label>
+                    <select name="" id="background">
+                        <option value="pastel-light">Pastel</option>
+                        <option value="pastel-dark">Pastel (Dark)</option>
+                    </select>
+                </div>
+            <!-- Clock Settings -->
+                <h3>Clock Settings</h3>
+                <div>
+                    <label for="clock-type">Clock: </label>
+                    <select name="" id="clock-type">
+                        <option value="none">None</option>
+                        <option value="12hr">12 Hour</option>
+                        <option value="24hr">24 Hour</option>
+                    </select>
+                </div>
+            </div>
 
-        <div class="setting">
-          <input type="checkbox" id="use12HourFormat" />
-          <label for="use12HourFormat">Use 12-Hour Clock</label>
-        </div>
-      </div>
+            <div>
+                <h3>Tab Settings</h3>
+                <div class="setting">
+                    <label for="newTabName">Tab Title:</label>
+                    <input type="text" id="newTabName" />
+                </div>
+            </div>
 
-      <div>
-        <h2>Tab Settings</h2>
-        <div class="setting">
-          <label for="newTabName">Tab Title:</label>
-          <input type="text" id="newTabName" />
-        </div>
-      </div>
-
-      <div>
-        <h2>Font Settings</h2>
-        <div class="setting">
-          <label for="fontSize">Font Size:</label>
-          <input type="number" id="fontSize" />
-        </div>
-        <div class="setting">
-          <label for="fontFamily">Font Family:</label>
-          <!-- <select id="fontFamily">
+            <div>
+                <h3>Font Settings</h3>
+                <div class="setting">
+                    <label for="fontSize">Font Size:</label>
+                    <input type="number" id="fontSize" />
+                </div>
+                <div class="setting">
+                    <label for="fontFamily">Font Family:</label>
+                    <!-- <select id="fontFamily">
             <option value="Roboto">Roboto</option>
             <option value="Salsa">Salsa</option>
             <option value="Long Cang">Long Cang</option>
             <option value="Sixtyfour">Sixtyfour</option>
           </select> -->
-          <input type="text" id="fontFamily" />
-        </div>
-      </div>
+                    <input type="text" id="fontFamily" />
+                </div>
+            </div>
 
-      <div>
-        <h2>Refresh Rate</h2>
+            <!-- <div>
+        <h3>Refresh Rate</h3>
         <div class="setting">
           <label for="refreshRate">Refresh Rate:</label>
           <input type="number" id="refreshRate" />
         </div>
-      </div>
-      <h2>Noise</h2>
-      <div class="noise">
-        <label for="noise">Noise: </label>
-        <select id="noise" disabled>
-          <!-- TODO: remove first High after option is enabled -->
-          <option value="high">High</option>
-          <option value="none">None</option>
-          <option value="low">Low</option>
-          <option value="high">High</option>
-        </select>
-      </div>
-    </div>
+      </div> -->
+            <h3>Noise</h3>
+            <div class="noise">
+                <label for="noise">Noise: </label>
+                <select id="noise">
+                    <option value="high">High</option>
+                    <option value="low">Low</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
 
-    <div id="content-behavioral">
-      <p style="color: red">
-        Coming soon! Please regularly check for updates in extension
-      </p>
-    </div>
-    <div id="content-extension">
-      <p style="color: red">
-        Will be updated soon! Please regularly check for updates in extension
-      </p>
-      <div class="setting">
-        <input type="checkbox" id="sync-profiles" checked disabled />
-        <label for="sync-profiles">Sync across Chrome Profiles</label>
-      </div>
+        <div id="content-behavioral">
+            <p style="color: red">
+                Coming soon! Please regularly check for updates in extension
+            </p>
+        </div>
+        <div id="content-extension">
+            <p style="color: red">
+                Will be updated soon! Please regularly check for updates in
+                extension
+            </p>
+            <div class="setting">
+                <input type="checkbox" id="sync-profiles" checked disabled />
+                <label for="sync-profiles">Sync across Chrome Profiles</label>
+            </div>
 
-      <div class="setting">
-        <input type="checkbox" id="realtime-sync" disabled />
-        <label for="realtime-sync">Sync settings in realtime</label>
-      </div>
-    </div>
+            <div class="setting">
+                <input type="checkbox" id="realtime-sync" disabled />
+                <label for="realtime-sync">Sync settings in realtime</label>
+            </div>
+        </div>
 
-    <div id="content-about-us">
-      <p>
-        Hey! I am Jayam, creating this beautiful extension with my friend Ayush
-      </p>
-      <p>
-        Reach us on github at
-        <a href="https://github.com/jayam04">github.com/jayam04</a> and
-        <a href="https://github.com/ayushkavad">github.com/ayushkavad</a>.
-        Surely this extension is open-sourced, you can find source code at
-        <a href="https://github.com/jayam04/simple-new-tab"
-          >github.com/jayam04/simple-new-tab</a
-        >
-      </p>
-    </div>
-  </body>
+        <div id="content-about-us">
+            <p>
+                Hey! I am Jayam, creating this beautiful extension with my
+                friend Ayush
+            </p>
+            <p>
+                Reach us on github at
+                <a href="https://github.com/jayam04">github.com/jayam04</a> and
+                <a href="https://github.com/ayushkavad">github.com/ayushkavad</a
+                >. Surely this extension is open-sourced, you can find source
+                code at
+                <a href="https://github.com/jayam04/simple-new-tab"
+                    >github.com/jayam04/simple-new-tab</a
+                >
+            </p>
+        </div>
+    </body>
 </html>
