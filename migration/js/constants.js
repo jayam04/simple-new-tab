@@ -42,17 +42,29 @@ export const FONT = {
 export const DEFAULT_SETTINGS = {
   // Extension
   chromeSync: true,
+  newTabName: EXTENSION.name,
 
   // Visual
   theme: "pastel-light",
   noise: "high",
   clockType: "12hr",
+  fontSize: 54,
+  fontFamily: "Salsa",
 
   // Behavioral
 
   // Extension (Settings Page)
   section: "visual",
 };
+
+export const STORAGE_VALUES = {
+  clockType: "clockType",
+  backgroundType: "theme",
+  fontFamily: "fontFamily",
+  fontSize: "fontSize",
+  newTabName: "newTabName",
+  noise: "noise",
+}
 
 export const TABS_IN_DIALOG = [
   { heading: "General Settings ✨" },
@@ -72,6 +84,10 @@ export const ELEMENTS = {
   // settings.html/visual
   backgroundType: "background",
   clockType: "clock-type",
+  newTabName: "new-tab-name",
+  fontSize: "font-size",
+  fontFamily: "font-family",
+  noise: "noise-settings"
 };
 
 export const CLASSES = {
@@ -88,3 +104,12 @@ export const EXTRAS = {
   clockType: "clockType",
   backgroundType: "theme",
 }
+
+export const VISUAL_ELEMENTS = [
+  "backgroundType",
+  "clockType",
+  "newTabName",
+  "fontSize",
+  "fontFamily",
+  "noise",
+];

@@ -1,97 +1,15 @@
-import { applyFontToElement, savePreference } from './helper.js';
-
 import {
     CLASSES,
     DEFAULT_SETTINGS,
     ELEMENTS,
-    EXTRAS,
     SECTIONS,
+    STORAGE_VALUES,
+    VISUAL_ELEMENTS,
 } from '../migration/js/constants.js';
-import { getPreference } from '../migration/js/getValues.js';
-
-const fontSize = document.getElementById('fontSize');
-const fontFamily = document.getElementById('fontFamily');
-const newTabName = document.getElementById('newTabName');
-const refreshRate = document.getElementById('refreshRate');
-const showMilliseconds = document.getElementById('showMilliseconds');
-const use12HourFormat = document.getElementById('use12HourFormat');
-
-const link1 = document.getElementById('link1');
-const link2 = document.getElementById('link2');
-const link3 = document.getElementById('link3');
+import {getPreference, savePreference} from '../migration/js/getValues.js';
 
 let currentSection = DEFAULT_SETTINGS.section;
 
-document.addEventListener('DOMContentLoaded', async function () {
-    // link1.addEventListener("click", function () {
-    //   document.getElementById("main-heading").innerText = "General Settings ✨";
-    //   document.getElementById("content1").classList.remove("hidden");
-    //   document.getElementById("content2").classList.add("hidden");
-    // });
-
-    // link2.addEventListener("click", function () {
-    //   document.getElementById("main-heading").innerText =
-    //     "Extensions Settings ✨";
-    //   document.getElementById("content1").classList.add("hidden");
-    //   document.getElementById("content2").classList.remove("hidden");
-    // });
-
-    // link3.addEventListener("click", function () {
-    //   updateTabInDialog(2);
-    // });
-
-    const storageFields = [
-        'showMilliseconds',
-        'use12HourFormat',
-        'newTabName',
-        'fontFamily',
-        'refreshRate',
-        'fontSizeUpdated',
-        'fontSize',
-    ];
-
-    const preferences = await chrome.storage.sync.get(storageFields);
-
-    showMilliseconds.checked = preferences.showMilliseconds;
-    use12HourFormat.checked = preferences.use12HourFormat;
-    newTabName.value = preferences.newTabName;
-    refreshRate.value = preferences.refreshRate;
-    fontFamily.value = preferences.fontFamily;
-    fontSize.value = preferences.fontSize;
-
-    newTabName.addEventListener('change', function () {
-        const newTabNameValue = this.value;
-        savePreference('newTabName', newTabNameValue);
-    });
-
-    showMilliseconds.addEventListener('change', function () {
-        const showMillisecondsChecked = this.checked;
-        savePreference('showMilliseconds', showMillisecondsChecked);
-    });
-
-    use12HourFormat.addEventListener('change', function () {
-        const use12HourFormatChecked = this.checked;
-        savePreference('use12HourFormat', use12HourFormatChecked);
-    });
-
-    fontFamily.addEventListener('change', function () {
-        const fontFamilyValue = this.value;
-        console.log(fontFamilyValue);
-        // applyFontToElement("digitalClockNewTab", fontFamilyValue);
-        savePreference('fontFamily', fontFamilyValue);
-    });
-
-    fontSize.addEventListener('change', function () {
-        const fontSizeValue = this.value;
-        savePreference('fontSize', fontSizeValue);
-        savePreference('fontSizeUpdated', true);
-    });
-
-    refreshRate.addEventListener('change', function () {
-        const refreshRateValue = this.value;
-        savePreference('refreshRate', refreshRateValue);
-    });
-});
 
 const loadAllSectionSelection = () => {
     // TODO: better name for `sectionHeadings`, also need to change constants.js based on it.
@@ -148,11 +66,12 @@ const handleSectionSelection = (event) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     loadAllSectionSelection();
-    // TODO: load sections
 });
 
-document.getElementById(ELEMENTS.backgroundType)
-    .value = getPreference("theme");
-
-document.getElementById(ELEMENTS.clockType)
-    .value = getPreference(EXTRAS.clockType);
+//  Event-listeners and default values
+for (let element of VISUAL_ELEMENTS) {
+    document.getElementById(ELEMENTS[element]).addEventListener('change', () => {
+        savePreference(STORAGE_VALUES[element], document.getElementById(ELEMENTS[element]).value)
+    })
+    document.getElementById(ELEMENTS[element]).value = getPreference(STORAGE_VALUES[element])
+}

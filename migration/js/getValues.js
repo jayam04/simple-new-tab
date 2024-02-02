@@ -11,17 +11,16 @@ if (chromeSync === null) {
 
 export const getPreference = (key) => {
     let value = localStorage.getItem(key);
-    // TODO: fix if condition not working as expected.
-    if (value === undefined) {
+    console.log(value)
+    if (value === undefined || value === null) {
         value = DEFAULT_SETTINGS[key];
-        console.log(value);
         localStorage.setItem(key, value);
     }
-    console.log(`getPreference: ${key} = ${value}`);
     return value;
 }
 
 export const savePreference = (key, value) => {
+    console.log(`savePreference: ${key} = ${value}`);
     localStorage.setItem(key, value);
     // Save preference to chrome sync too.
     // TODO: make it faster using async if possible
