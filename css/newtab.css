@@ -1,5 +1,5 @@
 * {
-  font-family: "Salsa", "Roboto", sans-serif;
+  font-family: "PT Sans", "Salsa", "Roboto", sans-serif;
 }
 
 body {
@@ -25,7 +25,6 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-image: url("/img/noise/noise-dark.png");
   background-size: 220px;
   background-repeat: repeat;
   z-index: -1;
@@ -45,7 +44,7 @@ body {
 }
 
 #quick-settings {
-  opacity: 1;
+  opacity: 0.5;
 }
 
 .show-settings {

@@ -1,12 +1,12 @@
-import { DEFAULT_SETTINGS } from "./constants.js";
+import {DEFAULT_SETTINGS} from "./constants.js";
 
 // Get some basic settings
 let chromeSync = localStorage.getItem("chromeSync");
 
 // Init basic settings if not
 if (chromeSync === null) {
-  chromeSync = DEFAULT_SETTINGS.chromeSync;
-  localStorage.setItem("chromeSync", chromeSync);
+    chromeSync = DEFAULT_SETTINGS.chromeSync;
+    localStorage.setItem("chromeSync", chromeSync);
 }
 
 export const getPreference = (key) => {

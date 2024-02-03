@@ -5,8 +5,8 @@ import {
     SECTIONS,
     STORAGE_VALUES,
     VISUAL_ELEMENTS,
-} from '../migration/js/constants.js';
-import {getPreference, savePreference} from '../migration/js/getValues.js';
+} from './constants.js';
+import {getPreference, savePreference} from './getValues.js';
 
 let currentSection = DEFAULT_SETTINGS.section;
 
@@ -70,6 +70,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //  Event-listeners and default values
 for (let element of VISUAL_ELEMENTS) {
+    if (element === "showSeconds") {
+        document.getElementById(ELEMENTS[element]).addEventListener('change', () => {
+            savePreference(STORAGE_VALUES[element], document.getElementById(ELEMENTS[element]).checked)
+        })
+        document.getElementById(ELEMENTS[element]).checked = getPreference(STORAGE_VALUES[element])
+        continue;
+    }
     document.getElementById(ELEMENTS[element]).addEventListener('change', () => {
         savePreference(STORAGE_VALUES[element], document.getElementById(ELEMENTS[element]).value)
     })

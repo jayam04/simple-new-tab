@@ -1,69 +1,68 @@
+import {applyFontSizeToElement, applyFontToElement} from "/js/helper.js";
+
+import {} from './helper.js';
+import {ELEMENTS, STORAGE_VALUES} from './constants.js';
+import {getPreference} from "./getValues.js";
 import {
-  applyFontToElement,
-  applyFontSizeToElement,
-  savePreference,
-  getFormattedTime,
-  generatePastelColor,
+    fetchSettingsFromChrome,
+    generatePastelColor,
+    updateBackgroundNoise,
+    updateDigitalClockNewTab
 } from "./helper.js";
-import { EXTENSION } from "../migration/js/constants.js";
 
-const updateDigitalClockNewTab = async ({
-  forceUpdateFont = false,
-  forceUpdateFontSize = false,
-} = {}) => {
-  const storageFields = [
-    "showMilliseconds",
-    "use12HourFormat",
-    "fontFamily",
-    "refreshRate",
-    "fontSizeUpdated",
-    "fontSize",
-  ];
+let noise = getPreference(STORAGE_VALUES.noise);
+let backgroundType = getPreference(STORAGE_VALUES.backgroundType);
+let clockType = getPreference(STORAGE_VALUES.clockType);
+let showSeconds = getPreference(STORAGE_VALUES.showSeconds);
+let fontSize = getPreference(STORAGE_VALUES.fontSize);
+let fontFamily = getPreference(STORAGE_VALUES.fontFamily);
 
-  const {
-    showMilliseconds,
-    use12HourFormat,
-    fontFamily,
-    fontUpdated,
-    fontSize,
-    fontSizeUpdated,
-  } = await chrome.storage.sync.get(storageFields);
+// Background Color
+document.body.style.backgroundColor = generatePastelColor(backgroundType === "pastel-light");
+if (noise !== "none") {
+    await updateBackgroundNoise(noise, backgroundType);
+}
+if (clockType === "12hr" || clockType === "24hr") {
+    await updateDigitalClockNewTab(clockType === "12hr", showSeconds === "true")
+}
 
-  if (forceUpdateFont || fontUpdated) {
-    applyFontToElement("digitalClockNewTab", fontFamily);
-    savePreference("fontUpdated", false);
-  }
+// Font
+applyFontToElement(ELEMENTS.digitalClock, fontFamily);
+applyFontSizeToElement(fontSize, ELEMENTS.digitalClock);
 
-  if (forceUpdateFontSize || fontSizeUpdated) {
-    applyFontSizeToElement(fontSize, "digitalClockNewTab");
-  }
+// Clock
+if (clockType === "12hr" || clockType === "24hr") {
+    setInterval(() => updateDigitalClockNewTab(clockType === "12hr", showSeconds === "true"), 1000 / getPreference(STORAGE_VALUES.refreshRate));
+}
+// TODO: better way to do it
+if (backgroundType === "pastel-dark") {
+    document.getElementById(ELEMENTS.digitalClock).style.color = "white";
+}
 
-  const formattedTime = getFormattedTime(use12HourFormat, showMilliseconds);
-
-  const clockElement = document.getElementById("digitalClockNewTab");
-  clockElement.innerText = formattedTime;
-  clockElement.style.fontFamily = `'${fontFamily}', 'Roboto'`;
-};
-
-const updateTabTitle = async () => {
-  const { newTabName } = await chrome.storage.sync.get(["newTabName"]);
-  document.title = newTabName || EXTENSION.name;
-};
-
-const setRefreshInterval = async () => {
-  const { refreshRate = 5 } = await chrome.storage.sync.get(["refreshRate"]);
-  setInterval(() => updateDigitalClockNewTab(), 1000 / refreshRate);
-};
-
-const initializeNewTab = async () => {
-  document.body.style.backgroundColor = generatePastelColor();
-
-  await updateDigitalClockNewTab({
-    forceUpdateFont: true,
-    forceUpdateFontSize: true,
-  });
-  await updateTabTitle();
-  await setRefreshInterval();
-};
-
-initializeNewTab();
+// Sync data from Chrome to local Storage
+await fetchSettingsFromChrome().then(
+    data => {
+        for (let key in data) {
+            switch (key) {
+                case "noise":
+                    noise = data[key];
+                    break;
+                case "backgroundType":
+                    backgroundType = data[key];
+                    break;
+                case "clockType":
+                    clockType = data[key];
+                    break;
+                case "showSeconds":
+                    showSeconds = data[key];
+                    break;
+                case "fontSize":
+                    fontSize = data[key];
+                    break;
+                case "fontFamily":
+                    fontFamily = data[key];
+                    break;
+            }
+        }
+    }
+);
