@@ -1,55 +1,63 @@
 * {
-    font-family: 'Salsa', 'Roboto', sans-serif;
+  font-family: "PT Sans", "Salsa", "Roboto", sans-serif;
 }
 
-h2 {
-    margin-bottom: 8px;
-    margin-top: 30px;
+.setting {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-div {
-    font-size: 13px;
-}
-
-p {
-    margin-top: 3px;
-}
-
-.warning {
-    color: red;
-}
-
-button {
-    padding: 0px 4px;
-    border: solid 1px;
-    border-radius: 7px;
-    margin: 2px 0px;
-}
-
-#save-button {
-    margin-top: 20px;
-    font-size: medium;
-    padding: 2px 7px;
-}
 input {
-    padding-left: 4px;
-    border: solid 1px;
-    border-radius: 7px;
-    margin: 2px 0px;
+  padding-left: 4px;
+  border: solid 1px;
+  border-radius: 7px;
+  margin: 2px 0px;
 }
 
 select {
-    padding-left: 4px;
-    border: solid 1px;
-    border-radius: 7px;
-    margin: 2px 0px;
+  padding-left: 4px;
+  border: solid 1px;
+  border-radius: 7px;
+  margin: 2px 0px;
 }
 
+button {
+  padding-left: 4px;
+  border: solid 1px;
+  border-radius: 7px;
+  margin: 2px 0px;
+}
 
+button:hover {
+  background-color: grey;
+}
 
-#digitalClock {
-    border: #666 solid 1px;
-    width: 100%;
-    border-radius: 11px;
-    min-height: 50px;
+.tab-selection {
+  margin: 6px 2px;
+  padding: 1px 6px;
+  border-radius: 2px;
+}
+
+.tab-selection:hover {
+  background-color: aquamarine;
+}
+
+.tab-selection-selected {
+  background-color: aquamarine;
+}
+
+.hidden-content {
+  display: none;
+}
+
+table, th, td {
+  color: blue;
+  border-color: blue;
+  border: 1px solid black;
+  border-style: dotted;
+}
+
+table {
+  border-radius: 10px;
 }

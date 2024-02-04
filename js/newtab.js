@@ -1,76 +1,76 @@
-import { DEFAULT_TAB_NAME } from './config/config.js';
-import { updateClockDisplay, generatePastelColor } from './helper.js';
+import {applyFontSizeToElement, applyFontToElement} from "/js/helper.js";
 
-const modal = document.querySelector('.modal');
-const overlay = document.querySelector('.overlay');
-const btnCloseModal = document.querySelector('.close-modal');
-const btnsOpenModal = document.querySelector('.show-modal');
-const link1 = document.getElementById('link1');
-const link2 = document.getElementById('link2');
+import {} from './helper.js';
+import {ELEMENTS, STORAGE_VALUES} from './constants.js';
+import {getPreference} from "./getValues.js";
+import {
+    fetchSettingsFromChrome,
+    generatePastelColor,
+    updateBackgroundNoise,
+    updateDigitalClockNewTab
+} from "./helper.js";
 
-const openModal = function () {
-  modal.classList.remove('hidden');
-  overlay.classList.remove('hidden');
-};
+let noise = getPreference(STORAGE_VALUES.noise);
+let backgroundType = getPreference(STORAGE_VALUES.backgroundType);
+let clockType = getPreference(STORAGE_VALUES.clockType);
+let showSeconds = getPreference(STORAGE_VALUES.showSeconds);
+let fontSize = getPreference(STORAGE_VALUES.fontSize);
+let fontFamily = getPreference(STORAGE_VALUES.fontFamily);
 
-const closeModal = function () {
-  modal.classList.add('hidden');
-  overlay.classList.add('hidden');
-};
+// Background Color
+document.body.style.backgroundColor = generatePastelColor(backgroundType === "pastel-light");
+if (noise !== "none") {
+    await updateBackgroundNoise(noise, backgroundType);
+}
+if (clockType === "12hr" || clockType === "24hr") {
+    await updateDigitalClockNewTab(clockType === "12hr", showSeconds === "true")
+}
 
-const updateDigitalClockNewTab = async ({
-  forceUpdateFont = false,
-  forceUpdateFontSize = false,
-} = {}) => {
-  await updateClockDisplay({
-    elementId: 'digitalClockNewTab',
-    forceUpdateFont,
-    forceUpdateFontSize,
-  });
-};
+// Font
+applyFontToElement(ELEMENTS.digitalClock, fontFamily);
+applyFontSizeToElement(fontSize, ELEMENTS.digitalClock);
 
-const updateTabTitle = async () => {
-  const { newTabName } = await chrome.storage.sync.get(['newTabName']);
-  document.title = newTabName || DEFAULT_TAB_NAME;
-};
-
-const setRefreshInterval = async () => {
-  const { refreshRate = 5 } = await chrome.storage.sync.get(['refreshRate']);
-  setInterval(() => updateDigitalClockNewTab(), 1000 / refreshRate);
-};
-
-const initializeNewTab = async () => {
-  btnsOpenModal.addEventListener('click', openModal);
-  btnCloseModal.addEventListener('click', closeModal);
-  overlay.addEventListener('click', closeModal);
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-      closeModal();
+// Clock
+if (clockType === "12hr" || clockType === "24hr") {
+    setInterval(() => updateDigitalClockNewTab(clockType === "12hr", showSeconds === "true"), 1000 / getPreference(STORAGE_VALUES.refreshRate));
+}
+// TODO: better way to do it
+if (backgroundType === "pastel-dark") {
+    document.getElementById(ELEMENTS.digitalClock).style.color = "white";
+    // document.querySelector(".svgClass").getSVGDocument().getElementById("svgInternalID").setAttribute("fill", "red")
+    
+    var svgElements = document.getElementsByClassName("svg");
+    for (let element of svgElements) {
+        console.log(element, "ELEMENT");
+        element.style.fill = "white";
+        element.setAttribute("fill", "white");
     }
-  });
+}
 
-  link1.addEventListener('click', function () {
-    document.getElementById('main-heading').innerText = 'General Settings ✨';
-    document.getElementById('content1').classList.remove('hidden');
-    document.getElementById('content2').classList.add('hidden');
-  });
-
-  link2.addEventListener('click', function () {
-    document.getElementById('main-heading').innerText =
-      'Extensions Settings ✨';
-    document.getElementById('content1').classList.add('hidden');
-    document.getElementById('content2').classList.remove('hidden');
-  });
-
-  document.body.style.backgroundColor = generatePastelColor();
-
-  await updateDigitalClockNewTab({
-    forceUpdateFont: true,
-    forceUpdateFontSize: true,
-  });
-  await updateTabTitle();
-  await setRefreshInterval();
-};
-
-initializeNewTab();
+// Sync data from Chrome to local Storage
+await fetchSettingsFromChrome().then(
+    data => {
+        for (let key in data) {
+            switch (key) {
+                case "noise":
+                    noise = data[key];
+                    break;
+                case "backgroundType":
+                    backgroundType = data[key];
+                    break;
+                case "clockType":
+                    clockType = data[key];
+                    break;
+                case "showSeconds":
+                    showSeconds = data[key];
+                    break;
+                case "fontSize":
+                    fontSize = data[key];
+                    break;
+                case "fontFamily":
+                    fontFamily = data[key];
+                    break;
+            }
+        }
+    }
+);
