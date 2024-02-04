@@ -1,4 +1,5 @@
 import {
+    BEHAVIORAL_ELEMENTS,
     CLASSES,
     DEFAULT_SETTINGS,
     ELEMENTS,
@@ -74,7 +75,23 @@ for (let element of VISUAL_ELEMENTS) {
         document.getElementById(ELEMENTS[element]).addEventListener('change', () => {
             savePreference(STORAGE_VALUES[element], document.getElementById(ELEMENTS[element]).checked)
         })
-        document.getElementById(ELEMENTS[element]).checked = getPreference(STORAGE_VALUES[element])
+        document.getElementById(ELEMENTS[element]).checked = getPreference(STORAGE_VALUES[element]) === "true";
+        continue;
+    }
+    document.getElementById(ELEMENTS[element]).addEventListener('change', () => {
+        savePreference(STORAGE_VALUES[element], document.getElementById(ELEMENTS[element]).value)
+    })
+    document.getElementById(ELEMENTS[element]).value = getPreference(STORAGE_VALUES[element])
+}
+
+for (let element of BEHAVIORAL_ELEMENTS) {
+    if (element === "chromeSync") {
+        document.getElementById(ELEMENTS[element]).addEventListener('change', () => {
+            savePreference(STORAGE_VALUES[element], document.getElementById(ELEMENTS[element]).checked, false);
+            console.log(2)
+        });
+        console.log(1)
+        document.getElementById(ELEMENTS[element]).checked = getPreference(STORAGE_VALUES[element]) === "true";
         continue;
     }
     document.getElementById(ELEMENTS[element]).addEventListener('change', () => {

@@ -37,6 +37,14 @@ if (clockType === "12hr" || clockType === "24hr") {
 // TODO: better way to do it
 if (backgroundType === "pastel-dark") {
     document.getElementById(ELEMENTS.digitalClock).style.color = "white";
+    // document.querySelector(".svgClass").getSVGDocument().getElementById("svgInternalID").setAttribute("fill", "red")
+    
+    var svgElements = document.getElementsByClassName("svg");
+    for (let element of svgElements) {
+        console.log(element, "ELEMENT");
+        element.style.fill = "white";
+        element.setAttribute("fill", "white");
+    }
 }
 
 // Sync data from Chrome to local Storage

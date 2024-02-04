@@ -101,8 +101,32 @@
                 extension
             </p>
             <div class="setting">
-                <input type="checkbox" id="sync-profiles" checked disabled />
+                <input type="checkbox" id="sync-profiles" />
                 <label for="sync-profiles">Sync across Chrome Profiles</label>
+            </div>
+            <div>
+                <label for="refresh-rate">Refresh Rate (per second): </label>
+                <input type="number" id="refresh-rate">
+                <!-- <p>Recommandation (for 99% accuracy): </p> -->
+                <table>
+                    <thead>
+                        <td>Recommandation</td>
+                        <td>Seconds ON</td>
+                        <td>Seconds OFF</td>
+                    </thead>
+                    <tr>
+                        <td>99% accuracy</td>
+                        <td>100</td>
+                        <td>1.67</td>
+                    </tr>
+                    <tr>
+                        <td>90% accuracy</td>
+                        <td>10</td>
+                        <td>0.167</td>
+                    </tr>
+                </table>
+                <!-- <p id="refresh-rate-input"></p>
+                <button id="auto-refresh-rate">Auto (Based on Settings)</button> -->
             </div>
 
             <div class="setting">

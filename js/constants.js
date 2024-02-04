@@ -68,6 +68,7 @@ export const STORAGE_VALUES = {
   noise: "noise",
   refreshRate: "refreshRate",
   showSeconds: "showSeconds",
+  chromeSync: "chromeSync",
 }
 
 export const TABS_IN_DIALOG = [
@@ -99,6 +100,9 @@ export const ELEMENTS = {
 
   // settings.html/behavioral
   refreshRate: "refresh-rate",
+  chromeSync: "sync-profiles",
+  // refreshRateInput: "refresh-rate-input",
+  // autoRefreshRate: "auto-refresh-rate",
 };
 
 export const CLASSES = {
@@ -125,4 +129,9 @@ export const VISUAL_ELEMENTS = [
   "fontFamily",
   "noise",
   "showSeconds"
+];
+
+export const BEHAVIORAL_ELEMENTS = [
+  "refreshRate",
+  "chromeSync",
 ];
