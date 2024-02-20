@@ -16,6 +16,7 @@ let clockType = getPreference(STORAGE_VALUES.clockType);
 let showSeconds = getPreference(STORAGE_VALUES.showSeconds);
 let fontSize = getPreference(STORAGE_VALUES.fontSize);
 let fontFamily = getPreference(STORAGE_VALUES.fontFamily);
+let newTabName = getPreference(STORAGE_VALUES.newTabName);
 
 // Background Color
 document.body.style.backgroundColor = generatePastelColor(backgroundType === "pastel-light");
@@ -47,6 +48,9 @@ if (backgroundType === "pastel-dark") {
     }
 }
 
+// New Tab Name
+document.title = newTabName;
+
 // Sync data from Chrome to local Storage
 await fetchSettingsFromChrome().then(
     data => {
@@ -70,6 +74,10 @@ await fetchSettingsFromChrome().then(
                 case "fontFamily":
                     fontFamily = data[key];
                     break;
+                case "newTabName":
+                    newTabName = data[key];
+                    break;
+                // TODO: fix, new data is not synced to lacal and also isn't reflected ie. tabName, etc
             }
         }
     }

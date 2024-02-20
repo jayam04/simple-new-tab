@@ -49,7 +49,7 @@ export const DEFAULT_SETTINGS = {
   noise: "high",
   clockType: "12hr",
   fontSize: 54,
-  fontFamily: "Salsa",
+  fontFamily: "Protest Riot",
   showSeconds: false,
 
   // Behavioral
