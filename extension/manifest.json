@@ -14,11 +14,10 @@
             "256": "icons/icon256.png",
             "500": "icons/icon500.png"
         },
-        "default_title": "Simple New Tab \u2728",
-        "default_popup": "popup.html"
+        "default_title": "Simple New Tab \u2728"
     },
     "chrome_url_overrides": {
-        "newtab": "newtab.html"
+        "newtab": "index.html"
     },
     "icons": {
         "48": "icons/icon48.png",
