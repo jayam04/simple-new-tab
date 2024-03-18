@@ -1,0 +1,32 @@
+body {
+    font-family: "Truculenta", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+  }
+  
+  .container-fluid {
+    max-width: 1200px;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    padding: 2rem;
+    margin: auto;
+  }
+  
+  .form-label {
+    font-weight: 600;
+  }
+  
+  .card {
+    border: none;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    font-weight: 600;
+  }
+  
+  .btn-danger,
+  .btn-warning,
+  .btn-primary {
+    font-weight: 600;
+  }
