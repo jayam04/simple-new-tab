@@ -30,3 +30,28 @@ body {
   .btn-primary {
     font-weight: 600;
   }
+
+  .notice-container {
+    background-color: #f8f8f8;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .notice-container:hover {
+    background-color: rgb(230, 222, 255);
+  }
+  
+  .notice-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .notice-content {
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  .notice-p1 {
+    background-color: red;
+  }

@@ -1,0 +1,14 @@
+{
+    "iloveindia": {
+        "duration": {
+            "to": "2024-06-02T00:00:00Z",
+            "from": null
+        },
+        "title": "Support Independent media in India",
+        "content": "Each day, journalism in India encounters fresh challenges, yet we stand in solidarity with news outlets committed to responsible reporting. Therefore, any contributions made prior to June 1, 2024 (the final day of the General Election in India), will be allocated towards supporting or subscribing to these reputable news organizations.",
+        "url": "https://crimsontwilight.in/iloveindia",
+        "removable": false,
+        "removeAfterClicks": null,
+        "priority": 1
+    }
+}
