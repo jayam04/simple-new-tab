@@ -1,3 +1,7 @@
+export const FILES = {
+  "fontFile": "data/fonts.json",
+  "notices": "data/notices.json"
+}
 // Names
 export const SECTIONS = {
   visual: {
