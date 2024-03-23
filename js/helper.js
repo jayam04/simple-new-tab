@@ -4,10 +4,10 @@ export const updateBackgroundNoise = async (noise, theme) => {
     console.log("updateBackgroundNoise", noise)
     let noiseTheme = "light";
     // TODO: update light dark with variables
-    if ((noise === "high" && theme === "pastel-light") || (noise === "low" && theme === "pastel-dark")) {
+    if ((noise === "high" && theme === "pastel") || (noise === "low" && theme === "pastel-dark")) {
         noiseTheme = "dark";
     }
-    document.getElementById(ELEMENTS.noiseContainer)
+    document.getElementById('noise-container')
         .style.backgroundImage = `url(/img/noise/noise-${noiseTheme}.png)`;
 }
 

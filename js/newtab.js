@@ -2,29 +2,60 @@ import {applyFontSizeToElement, applyFontToElement} from "/js/helper.js";
 
 import {} from './helper.js';
 import {ELEMENTS, STORAGE_VALUES} from './constants.js';
-import {getPreference} from "./getValues.js";
+// import {getPreference} from "./getValues.js";
 import {
     fetchSettingsFromChrome,
     generatePastelColor,
     updateBackgroundNoise,
     updateDigitalClockNewTab
 } from "./helper.js";
+import { getPreference } from "./storage.js";
+import { preferences } from "./preferences.js";
 
-let noise = getPreference(STORAGE_VALUES.noise);
-let backgroundType = getPreference(STORAGE_VALUES.backgroundType);
-let clockType = getPreference(STORAGE_VALUES.clockType);
-let showSeconds = getPreference(STORAGE_VALUES.showSeconds);
-let fontSize = getPreference(STORAGE_VALUES.fontSize);
-let fontFamily = getPreference(STORAGE_VALUES.fontFamily);
-let newTabName = getPreference(STORAGE_VALUES.newTabName);
+// let noise = getPreference(STORAGE_VALUES.noise);
+// let backgroundType = getPreference(STORAGE_VALUES.backgroundType);
+// let clockType = getPreference(STORAGE_VALUES.clockType);
+// let showSeconds = getPreference(STORAGE_VALUES.showSeconds);
+// let fontSize = getPreference(STORAGE_VALUES.fontSize);
+// let fontFamily = getPreference(STORAGE_VALUES.fontFamily);
+let result = {}
+for (const key in preferences) {
+    const element = preferences[key]
+    let subResult = getPreference(element.storageKey)
+
+    if (subResult === null || (element.allowed && !element.allowed.includes(subResult))) {
+        subResult = element.defaultValue
+    }
+
+    result[key] = subResult
+}
+
+console.log(result)
+
+let noise = result.noise
+let backgroundType = result.theme
+let clockType = result.clockFormat
+let showSeconds = result.showSeconds
+let fontSize = result.fontSize
+let fontFamily = result.fontFamily
+let newTabName = localStorage.getItem('title') || "New Tab";
+
+console.info(noise, backgroundType, clockType, showSeconds, fontSize, fontFamily, newTabName)
 
 // Background Color
-document.body.style.backgroundColor = generatePastelColor(backgroundType === "pastel-light");
+document.body.style.backgroundColor = generatePastelColor(backgroundType === "pastel");
 if (noise !== "none") {
     await updateBackgroundNoise(noise, backgroundType);
 }
 if (clockType === "12hr" || clockType === "24hr") {
     await updateDigitalClockNewTab(clockType === "12hr", showSeconds === "true")
+}
+
+let quickSettings = result.quickSettings
+console.log(quickSettings)
+if (quickSettings) {
+    document.getElementById('quick-settings').classList.remove("gone")
+    console.log('done')
 }
 
 // Font
@@ -45,6 +76,11 @@ if (backgroundType === "pastel-dark") {
         console.log(element, "ELEMENT");
         element.style.fill = "white";
         element.setAttribute("fill", "white");
+    }
+
+    document.getElementById("quick-settings").style.background = 'white';
+    for (let element of document.getElementsByClassName("quick-settings-a")) {
+        element.style.color = 'black';
     }
 }
 

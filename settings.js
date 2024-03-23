@@ -1,58 +1,236 @@
+import { preferences } from "./js/preferences.js";
+import { setPreference } from "./js/storage.js";
+
 // Get references to the settings elements
-const backgroundThemeSelect = document.getElementById('background-theme');
-const clockFormatSelect = document.getElementById('clock-format');
-const showSecondsCheckbox = document.getElementById('show-seconds');
-const tabTitleInput = document.getElementById('tab-title');
-const fontFamilySelect = document.getElementById('font-family');
-const fontSizeInput = document.getElementById('font-size');
-const noiseLevelSelect = document.getElementById('noise-level');
-const syncProfilesCheckbox = document.getElementById('sync-profiles');
-const refreshRateInput = document.getElementById('refresh-rate');
-const saveSettingsButton = document.getElementById('save-settings');
+const backgroundThemeSelect = {
+    element: document.getElementById('background-theme'),
+    storage: 'theme',
+    default: 'pastel',
+};
+const clockFormatSelect = {
+    element: document.getElementById('clock-format'),
+    storage: 'format',
+    default: '12hr',
+};
+const showSecondsCheckbox = {
+    element: document.getElementById('show-seconds'),
+    storage: 'seconds',
+    default: false,
+};
+const tabTitleInput = {
+    element: document.getElementById('tab-title'),
+    storage: 'title',
+    default: 'Simple New Tab',
+};
+// TODO: reomove one
+// const fontFamilySelect = {
+//     element: document.getElementById('font-family'),
+//     storage: 'fontFamily',
+//     default: 'Protest Riot',
+// };
+const fontFamilyInput = {
+    element: document.getElementById('font-family-input'),
+    storage: 'fontFamily',
+    default: 'Protest Riot',
+};
+const fontSizeInput = {
+    element: document.getElementById('font-size'),
+    storage: 'fontSize',
+    default: 54,
+};
+const noiseLevelSelect = {
+    element: document.getElementById('noise-level'),
+    storage: 'noiseLevel',
+    default: 'low',
+};
+const quickSettingsCheckbox = {
+    element: document.getElementById('show-quick-settings'),
+    storage: 'quickSettings',
+    default: true,
+};
+const syncProfilesCheckbox = {
+    element: document.getElementById('sync-profiles'),
+    storage: 'syncWithChrome',
+    default: true,
+};
 
+const refreshRateInput = {
+    element: document.getElementById('refresh-rate'),
+    storage: 'refreshRate',
+    default: 30,
+};
+const saveSettingsButton = {
+    element: document.getElementById('save-settings'),
+    storage: null,
+};
+
+const clearStorageButton = {
+    element: document.getElementById('clear-storage'),
+    storage: null,
+};
+
+
+// const toastLiveExample = {element: document.getElementById('liveToast')}
+
+// if (toastTrigger) {
+//   const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample.element)
+//   toastTrigger.element.addEventListener('click', () => {
+//     toastBootstrap.show()
+//   })
+// }
+
+console.log(syncProfilesCheckbox)
 // Load the saved settings
-// TODO: fix it while implementing and uncomment it
-// chrome.storage.sync.get(null, (settings) => {
-//   backgroundThemeSelect.value = settings.backgroundTheme || "pastel";
-//   clockFormatSelect.value = settings.clockFormat || "12";
-//   showSecondsCheckbox.checked = settings.showSeconds || false;
-//   tabTitleInput.value = settings.tabTitle || "";
-//   fontFamilySelect.value = settings.fontFamily || "Arial";
-//   fontSizeInput.value = settings.fontSize || 16;
-//   noiseLevelSelect.value = settings.noiseLevel || "none";
-//   syncProfilesCheckbox.checked = settings.syncProfiles || false;
-//   refreshRateInput.value = settings.refreshRate || 1000;
-// });
+syncProfilesCheckbox.element.checked =
+    localStorage.getItem(syncProfilesCheckbox.storage) === 'true';
+let useChrome = localStorage.getItem(syncProfilesCheckbox.storage) === 'true';
 
-// Save the settings when the user clicks the "Save Settings" button
-saveSettingsButton.addEventListener('click', () => {
-    const settings = {
-        backgroundTheme: backgroundThemeSelect.value,
-        clockFormat: clockFormatSelect.value,
-        showSeconds: showSecondsCheckbox.checked,
-        tabTitle: tabTitleInput.value,
-        fontFamily: fontFamilySelect.value,
-        fontSize: parseInt(fontSizeInput.value, 10),
-        noiseLevel: noiseLevelSelect.value,
-        syncProfiles: syncProfilesCheckbox.checked,
-        refreshRate: parseInt(refreshRateInput.value, 10),
-    };
+let currentSettings = { hehe: 1 };
+function updateFields() {
+    useChrome = localStorage.getItem(syncProfilesCheckbox.storage) === 'true';
+    if (useChrome) {
+        console.log('using chrome');
+        chrome.storage.sync.get((settings) => {
+            console.log(settings);
+            currentSettings = settings.settings || {};
+            console.log(currentSettings);
+            backgroundThemeSelect.element.value =
+                currentSettings[backgroundThemeSelect.storage] ||
+                backgroundThemeSelect.default;
+            clockFormatSelect.element.value =
+                currentSettings[clockFormatSelect.storage] ||
+                clockFormatSelect.default;
+            showSecondsCheckbox.element.checked =
+                currentSettings[showSecondsCheckbox.storage] === null
+                    ? showSecondsCheckbox.default
+                    : currentSettings[showSecondsCheckbox.storage];
+            tabTitleInput.element.value =
+                currentSettings[tabTitleInput.storage] || tabTitleInput.default;
+            // fontFamilySelect.element.value = fontFamily || 'Arial';
+            fontFamilyInput.element.value =
+                currentSettings[fontFamilyInput.storage] ||
+                fontFamilyInput.default;
+            fontSizeInput.element.value =
+                currentSettings[fontSizeInput.storage] || fontSizeInput.default;
+            noiseLevelSelect.element.value =
+                currentSettings[noiseLevelSelect.storage] ||
+                noiseLevelSelect.default;
+            quickSettingsCheckbox.element.checked =
+                currentSettings[quickSettingsCheckbox.storage] === null
+                    ? quickSettingsCheckbox.default
+                    : currentSettings[quickSettingsCheckbox.storage];
+            refreshRateInput.element.value =
+                currentSettings[refreshRateInput.storage] ||
+                refreshRateInput.default;
+        });
+    } else {
+        console.log('using local');
+        backgroundThemeSelect.element.value =
+            localStorage.getItem(backgroundThemeSelect.storage) ||
+            backgroundThemeSelect.default;
+        clockFormatSelect.element.value =
+            localStorage.getItem(clockFormatSelect.storage) ||
+            clockFormatSelect.default;
+        showSecondsCheckbox.element.checked =
+            localStorage.getItem(showSecondsCheckbox.storage) === 'true';
+        tabTitleInput.element.value =
+            localStorage.getItem(tabTitleInput.storage) ||
+            tabTitleInput.default;
+        // fontFamilySelect.element.value =
+        //     localStorage.getItem(fontFamilySelect.storage) ||
+        //     fontFamilySelect.default;
+        fontFamilyInput.element.value =
+            localStorage.getItem(fontFamilyInput.storage) ||
+            fontFamilyInput.default;
+        fontSizeInput.element.value =
+            localStorage.getItem(fontSizeInput.storage) ||
+            fontSizeInput.default;
+        noiseLevelSelect.element.value =
+            localStorage.getItem(noiseLevelSelect.storage) ||
+            noiseLevelSelect.default;
+        syncProfilesCheckbox.element.checked =
+            localStorage.getItem(syncProfilesCheckbox.storage) === 'true';
+        refreshRateInput.element.value =
+            localStorage.getItem(refreshRateInput.storage) ||
+            refreshRateInput.default;
+    }
+}
 
-    chrome.storage.sync.set(settings, () => {
-        console.log('Settings saved');
-    });
+updateFields();
+
+clearStorageButton.element.addEventListener('click', () => {
+    if (useChrome) {
+        chrome.storage.sync.clear();
+    }
+    localStorage.clear();
+
+    updateFields();
 });
 
+syncProfilesCheckbox.element.addEventListener('change', () => {
+    localStorage.setItem(
+        syncProfilesCheckbox.storage,
+        syncProfilesCheckbox.element.checked
+    );
+    useChrome = syncProfilesCheckbox.element.checked;
+    updateFields();
+});
+
+backgroundThemeSelect.element.addEventListener('change', () => {
+    setPreference(preferences.theme.storageKey, backgroundThemeSelect.element.value);
+});
+
+clockFormatSelect.element.addEventListener('change', () => {
+    setPreference(preferences.clockFormat.storageKey, clockFormatSelect.element.value);
+});
+
+showSecondsCheckbox.element.addEventListener('change', () => {
+    setPreference(preferences.showSeconds.storageKey, showSecondsCheckbox.element.checked);
+});
+
+tabTitleInput.element.addEventListener('change', () => {
+    setPreference(preferences.tabTitle.storageKey, tabTitleInput.element.value);
+});
+
+fontFamilyInput.element.addEventListener('change', () => {
+    setPreference(preferences.fontFamily.storageKey, fontFamilyInput.element.value);
+});
+
+fontSizeInput.element.addEventListener('change', () => {
+    setPreference(preferences.fontSize.storageKey, fontSizeInput.element.value);
+});
+
+quickSettingsCheckbox.element.addEventListener('change', () => {
+    setPreference(preferences.quickSettings.storageKey, quickSettingsCheckbox.element.checked);
+});
+
+refreshRateInput.element.addEventListener('change', () => {
+    setPreference(preferences.refreshRate.storageKey, refreshRateInput.element.value);
+});
+
+noiseLevelSelect.element.addEventListener('change', () => {
+    if (useChrome) {
+        currentSettings[noiseLevelSelect.storage] =
+            noiseLevelSelect.element.value;
+        chrome.storage.sync.set({
+            settings: currentSettings,
+        });
+    }
+    localStorage.setItem(
+        noiseLevelSelect.storage,
+        noiseLevelSelect.element.value
+    );
+});
 
 // Add notices from notices.json
-fetch(FILES.notices).then((notices) => {
+fetch('data/notices.json').then((notices) => {
     // For each response add notice
     notices.json().then((data) => {
         // for each key in data print key
         for (const key in data) {
             const notice = data[key];
-            if (notice.duration) {
-                const startDate = new Date(notice.duration["from"]);
+            if (notice.page === 'settings' && notice.duration) {
+                const startDate = new Date(notice.duration['from']);
                 const endDate = new Date(notice.duration.to);
 
                 if (startDate <= new Date() && new Date() <= endDate) {
@@ -71,6 +249,14 @@ fetch(FILES.notices).then((notices) => {
                     noticeElement.appendChild(noticeTitle);
                     noticeElement.appendChild(noticeContent);
 
+                    if (notice.url) {
+                        const moreInfoHref = document.createElement('a');
+                        moreInfoHref.classList.add('notice-more-info');
+                        moreInfoHref.href = notice.url;
+                        moreInfoHref.textContent = 'more info';
+
+                        noticeElement.appendChild(moreInfoHref);
+                    }
                     document
                         .getElementById('notice-board')
                         .appendChild(noticeElement);

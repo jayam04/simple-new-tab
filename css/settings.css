@@ -50,6 +50,10 @@ body {
   .notice-content {
     font-size: 0.9rem;
     color: #555;
+    margin-bottom: 0px;
+  }
+  .notice-more-info {
+    font-size: 0.9rem;
   }
 
   .notice-p1 {

@@ -1,7 +1,9 @@
 import {DEFAULT_SETTINGS} from "./constants.js";
+// import { syncProfilesCheckbox } from "../settings.js";
 
 // Get some basic settings
-let chromeSync = localStorage.getItem("chromeSync");
+// let chromeSync = localStorage.getItem(syncProfilesCheckbox.storage) === 'true';
+let chromeSync = localStorage.getItem("sync-profiles") === 'true';
 
 // Init basic settings if not
 if (chromeSync === null) {
