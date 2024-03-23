@@ -223,7 +223,7 @@ noiseLevelSelect.element.addEventListener('change', () => {
 });
 
 // Add notices from notices.json
-fetch('data/notices.json').then((notices) => {
+fetch('https://raw.githubusercontent.com/jayam04/simple-new-tab/new-settings/data/notices.json').then((notices) => {
     // For each response add notice
     notices.json().then((data) => {
         // for each key in data print key
