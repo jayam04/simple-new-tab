@@ -1,3 +1,7 @@
+export const FILES = {
+  "fontFile": "data/fonts.json",
+  "notices": "data/notices.json"
+}
 // Names
 export const SECTIONS = {
   visual: {
@@ -45,7 +49,7 @@ export const DEFAULT_SETTINGS = {
   newTabName: EXTENSION.name,
 
   // Visual
-  theme: "pastel-light",
+  theme: "pastel",
   noise: "high",
   clockType: "12hr",
   fontSize: 54,
@@ -59,16 +63,28 @@ export const DEFAULT_SETTINGS = {
   section: "visual",
 };
 
+// export const STORAGE_VALUES = {
+//   clockType: "clockType",
+//   backgroundType: "theme",
+//   fontFamily: "fontFamily",
+//   fontSize: "fontSize",
+//   newTabName: "newTabName",
+//   noise: "noise",
+//   refreshRate: "refreshRate",
+//   showSeconds: "showSeconds",
+//   chromeSync: "chromeSync",
+// }
 export const STORAGE_VALUES = {
-  clockType: "clockType",
+  clockType: "format",
   backgroundType: "theme",
   fontFamily: "fontFamily",
   fontSize: "fontSize",
-  newTabName: "newTabName",
-  noise: "noise",
+  newTabName: "title",
+  noise: "noiseLevel",
   refreshRate: "refreshRate",
-  showSeconds: "showSeconds",
-  chromeSync: "chromeSync",
+  showSeconds: "seconds",
+  chromeSync: "syncProfiles",
+  quickSettings: "quickSettings"
 }
 
 export const TABS_IN_DIALOG = [

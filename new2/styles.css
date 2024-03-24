@@ -37,9 +37,9 @@ body {
     border-radius: 0.5rem;
     margin-bottom: 2rem;
   }
-  /*.notice-container:hover {*/
-  /*  background-color: rgb(230, 222, 255);*/
-  /*}*/
+  .notice-container:hover {
+    background-color: rgb(230, 222, 255);
+  }
   
   .notice-title {
     font-size: 1rem;
@@ -50,10 +50,6 @@ body {
   .notice-content {
     font-size: 0.9rem;
     color: #555;
-    margin-bottom: 0px;
-  }
-  .notice-more-info {
-    font-size: 0.9rem;
   }
 
   .notice-p1 {
