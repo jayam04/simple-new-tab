@@ -45,7 +45,7 @@ export const preferences = {
         null
     ),
 
-    fontSize: new Preference('font-size', 54, 'font-size', null, null),
+    fontSize: new Preference('font-size', 28, 'font-size', null, null),
 
     noise: new Preference('noiseLevel', true, 'noise-level', null, [
         'low',
@@ -63,9 +63,17 @@ export const preferences = {
 
     refreshRate: new Preference(
         'refreshRate',
-        54,
+        5,
         'refresh-rate',
         null,
         null
     ),
+
+    syncWithChrome: new Preference(
+        'syncWithChrome',
+        true,
+        'sync-profiles',
+        null,
+        [true, false]
+    )
 };

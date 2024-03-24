@@ -1,5 +1,5 @@
-import { preferences } from "./js/preferences.js";
-import { setPreference } from "./js/storage.js";
+import { preferences } from './js/preferences.js';
+import { getPreference, setPreference } from './js/storage.js';
 
 // Get references to the settings elements
 const backgroundThemeSelect = {
@@ -69,7 +69,6 @@ const clearStorageButton = {
     storage: null,
 };
 
-
 // const toastLiveExample = {element: document.getElementById('liveToast')}
 
 // if (toastTrigger) {
@@ -79,7 +78,6 @@ const clearStorageButton = {
 //   })
 // }
 
-console.log(syncProfilesCheckbox)
 // Load the saved settings
 syncProfilesCheckbox.element.checked =
     localStorage.getItem(syncProfilesCheckbox.storage) === 'true';
@@ -87,74 +85,79 @@ let useChrome = localStorage.getItem(syncProfilesCheckbox.storage) === 'true';
 
 let currentSettings = { hehe: 1 };
 function updateFields() {
-    useChrome = localStorage.getItem(syncProfilesCheckbox.storage) === 'true';
-    if (useChrome) {
-        console.log('using chrome');
-        chrome.storage.sync.get((settings) => {
-            console.log(settings);
-            currentSettings = settings.settings || {};
-            console.log(currentSettings);
-            backgroundThemeSelect.element.value =
-                currentSettings[backgroundThemeSelect.storage] ||
-                backgroundThemeSelect.default;
-            clockFormatSelect.element.value =
-                currentSettings[clockFormatSelect.storage] ||
-                clockFormatSelect.default;
-            showSecondsCheckbox.element.checked =
-                currentSettings[showSecondsCheckbox.storage] === null
-                    ? showSecondsCheckbox.default
-                    : currentSettings[showSecondsCheckbox.storage];
-            tabTitleInput.element.value =
-                currentSettings[tabTitleInput.storage] || tabTitleInput.default;
-            // fontFamilySelect.element.value = fontFamily || 'Arial';
-            fontFamilyInput.element.value =
-                currentSettings[fontFamilyInput.storage] ||
-                fontFamilyInput.default;
-            fontSizeInput.element.value =
-                currentSettings[fontSizeInput.storage] || fontSizeInput.default;
-            noiseLevelSelect.element.value =
-                currentSettings[noiseLevelSelect.storage] ||
-                noiseLevelSelect.default;
-            quickSettingsCheckbox.element.checked =
-                currentSettings[quickSettingsCheckbox.storage] === null
-                    ? quickSettingsCheckbox.default
-                    : currentSettings[quickSettingsCheckbox.storage];
-            refreshRateInput.element.value =
-                currentSettings[refreshRateInput.storage] ||
-                refreshRateInput.default;
-        });
-    } else {
-        console.log('using local');
-        backgroundThemeSelect.element.value =
-            localStorage.getItem(backgroundThemeSelect.storage) ||
-            backgroundThemeSelect.default;
-        clockFormatSelect.element.value =
-            localStorage.getItem(clockFormatSelect.storage) ||
-            clockFormatSelect.default;
-        showSecondsCheckbox.element.checked =
-            localStorage.getItem(showSecondsCheckbox.storage) === 'true';
-        tabTitleInput.element.value =
-            localStorage.getItem(tabTitleInput.storage) ||
-            tabTitleInput.default;
-        // fontFamilySelect.element.value =
-        //     localStorage.getItem(fontFamilySelect.storage) ||
-        //     fontFamilySelect.default;
-        fontFamilyInput.element.value =
-            localStorage.getItem(fontFamilyInput.storage) ||
-            fontFamilyInput.default;
-        fontSizeInput.element.value =
-            localStorage.getItem(fontSizeInput.storage) ||
-            fontSizeInput.default;
-        noiseLevelSelect.element.value =
-            localStorage.getItem(noiseLevelSelect.storage) ||
-            noiseLevelSelect.default;
-        syncProfilesCheckbox.element.checked =
-            localStorage.getItem(syncProfilesCheckbox.storage) === 'true';
-        refreshRateInput.element.value =
-            localStorage.getItem(refreshRateInput.storage) ||
-            refreshRateInput.default;
-    }
+    // useChrome = localStorage.getItem(syncProfilesCheckbox.storage) === 'true';
+    // if (useChrome) {
+    //     console.log('using chrome');
+    //     chrome.storage.sync.get((settings) => {
+    //         console.log(settings);
+    //         currentSettings = settings.settings || {};
+    //         console.log(currentSettings);
+    //         backgroundThemeSelect.element.value =
+    //             currentSettings[backgroundThemeSelect.storage] ||
+    //             backgroundThemeSelect.default;
+    //         clockFormatSelect.element.value =
+    //             currentSettings[clockFormatSelect.storage] ||
+    //             clockFormatSelect.default;
+    //         showSecondsCheckbox.element.checked =
+    //             currentSettings[showSecondsCheckbox.storage] === null
+    //                 ? showSecondsCheckbox.default
+    //                 : currentSettings[showSecondsCheckbox.storage];
+    //         tabTitleInput.element.value =
+    //             currentSettings[tabTitleInput.storage] || tabTitleInput.default;
+    //         // fontFamilySelect.element.value = fontFamily || 'Arial';
+    //         fontFamilyInput.element.value =
+    //             currentSettings[fontFamilyInput.storage] ||
+    //             fontFamilyInput.default;
+    //         fontSizeInput.element.value =
+    //             currentSettings[fontSizeInput.storage] || fontSizeInput.default;
+    //         noiseLevelSelect.element.value =
+    //             currentSettings[noiseLevelSelect.storage] ||
+    //             noiseLevelSelect.default;
+    //         quickSettingsCheckbox.element.checked =
+    //             currentSettings[quickSettingsCheckbox.storage] === null
+    //                 ? quickSettingsCheckbox.default
+    //                 : currentSettings[quickSettingsCheckbox.storage];
+    //         refreshRateInput.element.value =
+    //             currentSettings[refreshRateInput.storage] ||
+    //             refreshRateInput.default;
+    //     });
+    // } else {
+    //     console.log('using local');
+    backgroundThemeSelect.element.value =
+        localStorage.getItem(backgroundThemeSelect.storage) ||
+        backgroundThemeSelect.default;
+    clockFormatSelect.element.value =
+        localStorage.getItem(clockFormatSelect.storage) ||
+        clockFormatSelect.default;
+    showSecondsCheckbox.element.checked =
+        localStorage.getItem(showSecondsCheckbox.storage) === 'true';
+    tabTitleInput.element.value =
+        getPreference(preferences.tabTitle.storageKey) || preferences.tabTitle.defaultValue;
+    // fontFamilySelect.element.value =
+    //     localStorage.getItem(fontFamilySelect.storage) ||
+    //     fontFamilySelect.default;
+    fontFamilyInput.element.value =
+        localStorage.getItem(fontFamilyInput.storage) ||
+        fontFamilyInput.default;
+    fontSizeInput.element.value =
+        getPreference(preferences.fontSize.storageKey) || preferences.fontSize.defaultValue;
+    noiseLevelSelect.element.value =
+        localStorage.getItem(noiseLevelSelect.storage) ||
+        noiseLevelSelect.default;
+    const syncProfiles = getPreference(preferences.syncWithChrome.storageKey)
+    syncProfilesCheckbox.element.checked =
+        syncProfiles === null ? preferences.syncWithChrome.defaultValue : syncProfiles === 'true';
+    refreshRateInput.element.value =
+        getPreference(preferences.refreshRate.storageKey) || preferences.refreshRate.defaultValue;
+    const quickSettingsPreference = getPreference(
+        preferences.quickSettings.storageKey
+    );
+    quickSettingsCheckbox.element.checked =
+        quickSettingsPreference === null
+            ? preferences.quickSettings.defaultValue
+            : quickSettingsPreference === 'true';
 }
+// }
 
 updateFields();
 
@@ -177,15 +180,24 @@ syncProfilesCheckbox.element.addEventListener('change', () => {
 });
 
 backgroundThemeSelect.element.addEventListener('change', () => {
-    setPreference(preferences.theme.storageKey, backgroundThemeSelect.element.value);
+    setPreference(
+        preferences.theme.storageKey,
+        backgroundThemeSelect.element.value
+    );
 });
 
 clockFormatSelect.element.addEventListener('change', () => {
-    setPreference(preferences.clockFormat.storageKey, clockFormatSelect.element.value);
+    setPreference(
+        preferences.clockFormat.storageKey,
+        clockFormatSelect.element.value
+    );
 });
 
 showSecondsCheckbox.element.addEventListener('change', () => {
-    setPreference(preferences.showSeconds.storageKey, showSecondsCheckbox.element.checked);
+    setPreference(
+        preferences.showSeconds.storageKey,
+        showSecondsCheckbox.element.checked
+    );
 });
 
 tabTitleInput.element.addEventListener('change', () => {
@@ -193,7 +205,10 @@ tabTitleInput.element.addEventListener('change', () => {
 });
 
 fontFamilyInput.element.addEventListener('change', () => {
-    setPreference(preferences.fontFamily.storageKey, fontFamilyInput.element.value);
+    setPreference(
+        preferences.fontFamily.storageKey,
+        fontFamilyInput.element.value
+    );
 });
 
 fontSizeInput.element.addEventListener('change', () => {
@@ -201,11 +216,17 @@ fontSizeInput.element.addEventListener('change', () => {
 });
 
 quickSettingsCheckbox.element.addEventListener('change', () => {
-    setPreference(preferences.quickSettings.storageKey, quickSettingsCheckbox.element.checked);
+    setPreference(
+        preferences.quickSettings.storageKey,
+        quickSettingsCheckbox.element.checked
+    );
 });
 
 refreshRateInput.element.addEventListener('change', () => {
-    setPreference(preferences.refreshRate.storageKey, refreshRateInput.element.value);
+    setPreference(
+        preferences.refreshRate.storageKey,
+        refreshRateInput.element.value
+    );
 });
 
 noiseLevelSelect.element.addEventListener('change', () => {
@@ -223,7 +244,9 @@ noiseLevelSelect.element.addEventListener('change', () => {
 });
 
 // Add notices from notices.json
-fetch('https://raw.githubusercontent.com/jayam04/simple-new-tab/new-settings/data/notices.json').then((notices) => {
+fetch(
+    'https://raw.githubusercontent.com/jayam04/simple-new-tab/master/data/notices.json'
+).then((notices) => {
     // For each response add notice
     notices.json().then((data) => {
         // for each key in data print key

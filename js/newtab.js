@@ -23,14 +23,13 @@ for (const key in preferences) {
     const element = preferences[key]
     let subResult = getPreference(element.storageKey)
 
-    if (subResult === null || (element.allowed && !element.allowed.includes(subResult))) {
+    if (subResult === null) {
         subResult = element.defaultValue
     }
 
     result[key] = subResult
 }
 
-console.log(result)
 
 let noise = result.noise
 let backgroundType = result.theme
@@ -38,7 +37,7 @@ let clockType = result.clockFormat
 let showSeconds = result.showSeconds
 let fontSize = result.fontSize
 let fontFamily = result.fontFamily
-let newTabName = localStorage.getItem('title') || "New Tab";
+let newTabName = getPreference(preferences.tabTitle.storageKey) || preferences.tabTitle.defaultValue;
 
 console.info(noise, backgroundType, clockType, showSeconds, fontSize, fontFamily, newTabName)
 
@@ -52,10 +51,8 @@ if (clockType === "12hr" || clockType === "24hr") {
 }
 
 let quickSettings = result.quickSettings
-console.log(quickSettings)
-if (quickSettings) {
+if (quickSettings || quickSettings === 'true') {
     document.getElementById('quick-settings').classList.remove("gone")
-    console.log('done')
 }
 
 // Font
@@ -73,7 +70,6 @@ if (backgroundType === "pastel-dark") {
     
     var svgElements = document.getElementsByClassName("svg");
     for (let element of svgElements) {
-        console.log(element, "ELEMENT");
         element.style.fill = "white";
         element.setAttribute("fill", "white");
     }

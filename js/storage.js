@@ -1,4 +1,7 @@
 let syncWithChrome = localStorage.getItem('syncWithChrome') === true;
+if (syncWithChrome) {
+    console.log('Chrome Sync On');
+}
 
 export function getPreference(preference) {
     return localStorage.getItem(preference);
@@ -9,6 +12,11 @@ export function getPreferences(preferences) {
     preferences.forEach((preference) => {
         result[preference] = getPreference(preference);
     });
+
+    if (result === 'true' || result === 'false') {
+        result = result === 'true';
+    }
+
     return result;
 }
 
