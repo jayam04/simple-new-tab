@@ -1,26 +1,27 @@
-import { preferences } from './js/preferences.js';
-import { getPreference, setPreference } from './js/storage.js';
+import { preferences } from './preferences.js';
+import { getPreference, setPreference } from './storage.js';
+import { noticeList } from './constants.js';
 
 // Get references to the settings elements
 const backgroundThemeSelect = {
     element: document.getElementById('background-theme'),
     storage: 'theme',
-    default: 'pastel',
+    default: 'pastel'
 };
 const clockFormatSelect = {
     element: document.getElementById('clock-format'),
     storage: 'format',
-    default: '12hr',
+    default: '12hr'
 };
 const showSecondsCheckbox = {
     element: document.getElementById('show-seconds'),
     storage: 'seconds',
-    default: false,
+    default: false
 };
 const tabTitleInput = {
     element: document.getElementById('tab-title'),
     storage: 'title',
-    default: 'Simple New Tab',
+    default: 'Simple New Tab'
 };
 // TODO: reomove one
 // const fontFamilySelect = {
@@ -31,42 +32,42 @@ const tabTitleInput = {
 const fontFamilyInput = {
     element: document.getElementById('font-family-input'),
     storage: 'fontFamily',
-    default: 'Protest Riot',
+    default: 'Protest Riot'
 };
 const fontSizeInput = {
     element: document.getElementById('font-size'),
     storage: 'fontSize',
-    default: 54,
+    default: 54
 };
 const noiseLevelSelect = {
     element: document.getElementById('noise-level'),
     storage: 'noiseLevel',
-    default: 'low',
+    default: 'low'
 };
 const quickSettingsCheckbox = {
     element: document.getElementById('show-quick-settings'),
     storage: 'quickSettings',
-    default: true,
+    default: true
 };
 const syncProfilesCheckbox = {
     element: document.getElementById('sync-profiles'),
     storage: 'syncWithChrome',
-    default: true,
+    default: true
 };
 
 const refreshRateInput = {
     element: document.getElementById('refresh-rate'),
     storage: 'refreshRate',
-    default: 30,
+    default: 30
 };
 const saveSettingsButton = {
     element: document.getElementById('save-settings'),
-    storage: null,
+    storage: null
 };
 
 const clearStorageButton = {
     element: document.getElementById('clear-storage'),
-    storage: null,
+    storage: null
 };
 
 // const toastLiveExample = {element: document.getElementById('liveToast')}
@@ -84,6 +85,7 @@ syncProfilesCheckbox.element.checked =
 let useChrome = localStorage.getItem(syncProfilesCheckbox.storage) === 'true';
 
 let currentSettings = { hehe: 1 };
+
 function updateFields() {
     // useChrome = localStorage.getItem(syncProfilesCheckbox.storage) === 'true';
     // if (useChrome) {
@@ -144,7 +146,7 @@ function updateFields() {
     noiseLevelSelect.element.value =
         localStorage.getItem(noiseLevelSelect.storage) ||
         noiseLevelSelect.default;
-    const syncProfiles = getPreference(preferences.syncWithChrome.storageKey)
+    const syncProfiles = getPreference(preferences.syncWithChrome.storageKey);
     syncProfilesCheckbox.element.checked =
         syncProfiles === null ? preferences.syncWithChrome.defaultValue : syncProfiles === 'true';
     refreshRateInput.element.value =
@@ -157,6 +159,7 @@ function updateFields() {
             ? preferences.quickSettings.defaultValue
             : quickSettingsPreference === 'true';
 }
+
 // }
 
 updateFields();
@@ -234,7 +237,7 @@ noiseLevelSelect.element.addEventListener('change', () => {
         currentSettings[noiseLevelSelect.storage] =
             noiseLevelSelect.element.value;
         chrome.storage.sync.set({
-            settings: currentSettings,
+            settings: currentSettings
         });
     }
     localStorage.setItem(
@@ -245,7 +248,7 @@ noiseLevelSelect.element.addEventListener('change', () => {
 
 // Add notices from notices.json
 fetch(
-    'https://raw.githubusercontent.com/jayam04/simple-new-tab/master/data/notices.json'
+    noticeList
 ).then((notices) => {
     // For each response add notice
     notices.json().then((data) => {
