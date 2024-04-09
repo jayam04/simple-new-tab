@@ -47,11 +47,13 @@ if (noise !== 'none') {
 }
 if (clockType === '12hr' || clockType === '24hr') {
     await updateDigitalClockNewTab(clockType === '12hr', showSeconds === 'true');
-}
+} 
 
 let quickSettings = result.quickSettings;
-if (quickSettings || quickSettings === 'true') {
-    document.getElementById('quick-settings').classList.remove('gone');
+console.log("QS")
+console.log(quickSettings === 'true' || quickSettings == true);
+if (quickSettings === 'true' || quickSettings == true) {
+    document.getElementById('quick-settings').style.visibility = "visible";
 }
 
 // Font
