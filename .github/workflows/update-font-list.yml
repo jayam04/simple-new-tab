@@ -36,6 +36,6 @@ jobs:
                 scripts/increment_minor_version.py
 
             - name: Checkout
-            uses: actions/checkout@v3.5.2
-            with:
-              ssh-key: ${{secrets.GA1_GITHUB_ACTIONS_SSH_KEY}}
+              uses: actions/checkout@v3.5.2
+              with:
+                ssh-key: ${{secrets.GA1_GITHUB_ACTIONS_SSH_KEY}}
