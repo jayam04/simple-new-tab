@@ -15,18 +15,18 @@ function Preference(
 export const preferences = {
     theme: new Preference('theme', 'pastel', 'background-theme', null, [
         'pastel',
-        'pastel-dark',
+        'pastel-dark'
     ]),
 
     clockFormat: new Preference('clock-format', '12hr', 'clock-format', null, [
         '24hr',
         '12hr',
-        'none',
+        'none'
     ]),
 
     showSeconds: new Preference('seconds', false, 'show-seconds', null, [
         true,
-        false,
+        false
     ]),
 
     tabTitle: new Preference(
@@ -50,7 +50,7 @@ export const preferences = {
     noise: new Preference('noiseLevel', true, 'noise-level', null, [
         'low',
         'high',
-        'none',
+        'none'
     ]),
 
     quickSettings: new Preference(

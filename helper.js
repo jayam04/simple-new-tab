@@ -1,15 +1,15 @@
-import {ELEMENTS, FONT, VISUAL_ELEMENTS} from "./constants.js";
+import { FONT, VISUAL_ELEMENTS } from './constants.js';
 
 export const updateBackgroundNoise = async (noise, theme) => {
-    console.log("updateBackgroundNoise", noise)
-    let noiseTheme = "light";
+    console.log('updateBackgroundNoise', noise);
+    let noiseTheme = 'light';
     // TODO: update light dark with variables
-    if ((noise === "high" && theme === "pastel") || (noise === "low" && theme === "pastel-dark")) {
-        noiseTheme = "dark";
+    if ((noise === 'high' && theme === 'pastel') || (noise === 'low' && theme === 'pastel-dark')) {
+        noiseTheme = 'dark';
     }
     document.getElementById('noise-container')
         .style.backgroundImage = `url(/img/noise/noise-${noiseTheme}.png)`;
-}
+};
 
 export const updateDigitalClockNewTab = async (use12HourFormat, showSeconds) => {
     const formattedTime = getFormattedTime(use12HourFormat, showSeconds);
@@ -23,13 +23,13 @@ export const fetchSettingsFromChrome = async () => {
     chrome.storage.sync.get(VISUAL_ELEMENTS, (data) => {
         for (let element in VISUAL_ELEMENTS) {
             if (localStorage.getItem(element) !== data[element]) {
-                localStorage.setItem(element, data[element])
+                localStorage.setItem(element, data[element]);
                 changes.push(element);
             }
         }
     });
     return changes;
-}
+};
 
 /**
  * Generates a random pastel color.
@@ -53,7 +53,6 @@ export const generatePastelColor = (lightColors = true) => {
     const rgbColor = hslToRgb(hue / 360, saturation, lightness);
     return rgbToHex(rgbColor[0], rgbColor[1], rgbColor[2]);
 };
-
 
 
 const hslToRgb = (h, s, l) => {
@@ -87,7 +86,7 @@ const hslToRgb = (h, s, l) => {
 const rgbToHex = (r, g, b) => {
     const toHex = (value) => {
         const hex = value.toString(16);
-        return hex.length === 1 ? "0" + hex : hex;
+        return hex.length === 1 ? '0' + hex : hex;
     };
 
     return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
@@ -95,25 +94,25 @@ const rgbToHex = (r, g, b) => {
 
 export const getGoogleFontUrl = (fontName) => {
     const fontURL = `${FONT.googleFontBaseUrl}?family=${fontName.replace(
-        " ",
-        "+"
+        ' ',
+        '+'
     )}:wght@400;700&display=swap`;
     return `@import url('${fontURL}');`;
 };
 
 export const applyFontToElement = (elementId, fontName) => {
-    console.log(elementId, fontName)
-    const fontStylesheet = document.createElement("link");
+    console.log(elementId, fontName);
+    const fontStylesheet = document.createElement('link');
 
-    if (!fontName.includes(" ")) {
+    if (!fontName.includes(' ')) {
         fontStylesheet.href = `${FONT.googleFontBaseUrl}?family=${fontName}`;
     } else {
         fontStylesheet.href = `${FONT.googleFontBaseUrl}?family=${fontName.replace(
-            " ",
-            "+"
+            ' ',
+            '+'
         )}`;
     }
-    fontStylesheet.rel = "stylesheet";
+    fontStylesheet.rel = 'stylesheet';
     document.head.appendChild(fontStylesheet);
 
     const digitalClockElement = document.getElementById(elementId);
@@ -122,27 +121,27 @@ export const applyFontToElement = (elementId, fontName) => {
 
 export const getFormattedTime = (use12HourFormat, displaySeconds) => {
     const now = new Date();
-    let hours = now.getHours().toString().padStart(2, "0");
-    let minutes = now.getMinutes().toString().padStart(2, "0");
-    let seconds = now.getSeconds().toString().padStart(2, "0");
-    let ampm = "";
+    let hours = now.getHours().toString().padStart(2, '0');
+    let minutes = now.getMinutes().toString().padStart(2, '0');
+    let seconds = now.getSeconds().toString().padStart(2, '0');
+    let ampm = '';
     if (!displaySeconds) {
-        seconds = "";
+        seconds = '';
     } else {
         seconds = `:${seconds}`;
     }
     if (use12HourFormat) {
         if (hours > 12) {
             hours -= 12;
-            ampm = " PM";
+            ampm = ' PM';
         } else {
-            ampm = " AM";
+            ampm = ' AM';
         }
     }
     return `${hours}:${minutes}${seconds}${ampm}`;
 };
 
-export const applyFontSizeToElement = function (fontSizeInPx, elementId) {
+export const applyFontSizeToElement = function(fontSizeInPx, elementId) {
     const digitalClockElement = document.getElementById(elementId);
     digitalClockElement.style.fontSize = `${fontSizeInPx}px`;
 };
