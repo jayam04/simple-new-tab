@@ -20,7 +20,7 @@ fetch(fontList)
     .then((response) => response.json())
     .then((data) => {
         const fontFamilyInputDataList = document.getElementById('font-family-input-datalist');
-        data.fonts.forEach((font) => {
+        data.forEach((font) => {
             const option = document.createElement('option');
             option.value = font;
             option.text = font;

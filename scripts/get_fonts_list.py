@@ -36,12 +36,38 @@ def save_fonts(fonts_list, file_path):
     :return: None
     """
     with open(file_path, 'w') as f:
-        json.dump(fonts_list, f)
+        json.dump(fonts_list, f, indent=4)
 
 
-# get API key from environment variable API_KEY
-API_KEY = os.environ['API_KEY']
-FILE_PATH = 'fonts.json'
+def get_api_key():
+    """
+    get API key from file
+    :return: API key
+    """
+    if 'API_KEY' in os.environ:
+        return os.environ['API_KEY']
+    with open("private/google_fonts_aou_key.txt") as f:
+        return f.read()
+    
 
-# save fonts in json
-save_fonts(clean_fonts(get_fonts_raw(API_KEY)), 'fonts.json')
+def main():
+    API_KEY = get_api_key()
+    FILE_PATH = 'data/fontsv2.json'
+
+    # get existing fonts from json
+    with open(FILE_PATH) as file:
+        existing_fonts = json.load(file)
+
+    # get new fonts
+    new_fonts = clean_fonts(get_fonts_raw(API_KEY))
+
+    if sorted(existing_fonts) == sorted(new_fonts):
+        print("No new fonts found")
+        exit()
+
+    # save fonts in json
+    save_fonts(new_fonts, FILE_PATH)
+
+
+if __name__ == '__main__':
+    main()

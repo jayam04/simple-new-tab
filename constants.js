@@ -103,5 +103,5 @@ export const VISUAL_ELEMENTS = [
 ];
 
 export const kofi = 'https://ko-fi.com/jayampatel';
-export const fontList = 'https://raw.githubusercontent.com/jayam04/simple-new-tab/master/data/fonts.json';
+export const fontList = 'https://raw.githubusercontent.com/jayam04/simple-new-tab/master/data/fontsv2.json';
 export const noticeList = 'https://raw.githubusercontent.com/jayam04/simple-new-tab/master/data/notices.json';
