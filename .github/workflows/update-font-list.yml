@@ -35,7 +35,21 @@ jobs:
               run: |
                 scripts/increment_minor_version.py
 
-            - name: Checkout
-              uses: actions/checkout@v3.5.2
+            - name: Commit changes
+              if: steps.check_file_changed.outputs.file_changed == 'true'
+              run: |
+                git config --global user.name 'GitHub Actions'
+                git config --global user.email 'actions@github.com'
+                git add .
+                git commit -m 'Update font list'
+            
+            - name: Create Pull Request
+              if: steps.check_file_changed.outputs.file_changed == 'true'
+              uses: peter-evans/create-pull-request@v3
               with:
-                ssh-key: ${{secrets.GA1_GITHUB_ACTIONS_SSH_KEY}}
+                token: ${{ secrets.GITHUB_TOKEN }}
+                committer: GitHub Actions <actions@github.com>
+                author: GitHub Actions <actions@github.com>
+                title: 'Update Font List'
+                branch: update-font-list
+                body: This pull request updates the font list.
