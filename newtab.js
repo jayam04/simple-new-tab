@@ -94,7 +94,7 @@ document.getElementById('resetButton').addEventListener('click', () => {
 // Check if stopwatch should be visible
 const showStopwatch = getPreference(preferences.showStopwatch.storageKey);
 if (showStopwatch === 'true') {
-    document.getElementById('stopwatch').style.visibility = 'visible';
+    document.getElementById('stopwatch').style.display = 'block';
 }
 
 // Font
