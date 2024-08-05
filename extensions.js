@@ -45,7 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
         cardBody.appendChild(icon);
         cardBody.appendChild(title);
         cardBody.appendChild(toggle);
-        cardBody.appendChild(link);
+        card.addEventListener('click', () => {
+            window.location.href = extension.url;
+        });
 
         card.appendChild(cardBody);
         extensionsList.appendChild(card);
