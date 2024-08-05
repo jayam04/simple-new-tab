@@ -86,6 +86,10 @@ body {
     font-size: large;
 }
 
+.quick-settings-icon.bi-puzzle-fill {
+    color: #007bff;
+}
+
 .show-settings {
     width: 24px;
     height: auto;
