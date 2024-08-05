@@ -45,8 +45,15 @@ document.addEventListener('DOMContentLoaded', () => {
         cardBody.appendChild(icon);
         cardBody.appendChild(title);
         cardBody.appendChild(toggle);
-        card.addEventListener('click', () => {
-            window.location.href = extension.url;
+        card.addEventListener('click', (event) => {
+            if (!event.target.closest('.form-check-input')) {
+                window.location.href = extension.url;
+            }
+        });
+
+        toggleInput.addEventListener('change', () => {
+            extension.enabled = toggleInput.checked;
+            // Add code here to save the enabled status if needed
         });
 
         card.appendChild(cardBody);
