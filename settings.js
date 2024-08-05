@@ -225,6 +225,21 @@ quickSettingsCheckbox.element.addEventListener('change', () => {
     );
 });
 
+const showStopwatchCheckbox = {
+    element: document.getElementById('show-stopwatch'),
+    storage: 'showStopwatch',
+    default: false
+};
+
+showStopwatchCheckbox.element.checked = getPreference(preferences.showStopwatch.storageKey) === 'true';
+
+showStopwatchCheckbox.element.addEventListener('change', () => {
+    setPreference(
+        preferences.showStopwatch.storageKey,
+        showStopwatchCheckbox.element.checked
+    );
+});
+
 refreshRateInput.element.addEventListener('change', () => {
     setPreference(
         preferences.refreshRate.storageKey,

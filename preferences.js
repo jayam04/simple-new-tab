@@ -75,5 +75,12 @@ export const preferences = {
         'sync-profiles',
         null,
         [true, false]
+    ),
+    showStopwatch: new Preference(
+        'showStopwatch',
+        false,
+        'show-stopwatch',
+        null,
+        [true, false]
     )
 };
