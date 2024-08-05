@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const extensions = [
         { name: 'Stopwatch Timer', url: '/extensions/stopwatch/stopwatch.html', enabled: true, icon: 'bi bi-stopwatch' },
-        { name: 'Key Bindings', url: '/extensions/keybindings/keybindings.html', enabled: true, icon: 'bi bi-keyboard' },
+        // { name: 'Key Bindings', url: '/extensions/keybindings/keybindings.html', enabled: true, icon: 'bi bi-keyboard' },
         // Add more extensions here
     ];
 
