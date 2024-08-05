@@ -9,13 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     extensions.forEach(extension => {
         const card = document.createElement('div');
-        card.className = 'card mb-3';
+        card.className = 'card mb-3 clickable';
 
         const cardBody = document.createElement('div');
         cardBody.className = 'card-body';
 
         const icon = document.createElement('i');
-        icon.className = extension.icon;
+        icon.className = `icon ${extension.icon}`;
 
         const title = document.createElement('h5');
         title.className = 'card-title';
@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const toggleLabel = document.createElement('label');
         toggleLabel.className = 'form-check-label';
         toggleLabel.htmlFor = `toggle-${extension.name}`;
-        toggleLabel.textContent = 'Enabled';
 
         toggle.appendChild(toggleInput);
         toggle.appendChild(toggleLabel);
